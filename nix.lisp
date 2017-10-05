@@ -17,6 +17,7 @@
 
 (in-package :nix-lisp/nix)
 
+(defparameter +self+ "nix")
 (defparameter +hostname+ (hostname))
 (defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
 (defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
@@ -52,10 +53,16 @@
       (when arguments (run/i arguments))
       (success))))
 
+(defun display-usage ()
+  (format t "Usage: ~A [COMMAND]... [OPTION]...
+
+See https://github.com/ebzzry/nix-lisp for more information~%"
+          +self+))
+
 (exporting-definitions
  (defun nix (args)
    (ensure-nixpkgs)
-   (cond ((null args) (err "meh"))
+   (cond ((null args) (display-usage))
          (t (let ((self (argv0))
                   (op (first args))
                   (a (rest args)))
@@ -287,6 +294,7 @@
    (success)))
 
 (defun main (&rest args)
-   (apply #'nix args))
+  (apply #'nix args)
+  (success))
 
 (register-commands :nix-lisp/nix)

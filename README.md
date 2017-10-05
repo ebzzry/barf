@@ -1,8 +1,12 @@
 nix-lisp
 ========
 
-This is the standalone nix script separated
-from [ebzzry/scripts](https://github.com/ebzzry/scripts).
+This utility provides a single `nix` binary for managing your Nixpkgs and NixOS installation. It makes it
+easy—at least for me—to manage my system, instead of memorizing many commands with different
+interfaces.
+
+This program was salvaged from [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into
+a repository of its own, to make it easier to distribute.
 
 
 Building
@@ -22,7 +26,7 @@ Commands
 - which
 - store
 - repl
-- shell
+- shell, pure-shell
 - impure-shell
 - rebuild
 - rebuild-switch
