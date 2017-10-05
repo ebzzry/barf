@@ -9,13 +9,11 @@ CL=cl-launch
 all: $(NAME)
 
 $(NAME):
-	@$(CL) --output $(NAME) --dump ! --lisp sbcl --quicklisp --dispatch-system $(NAME)/nix --system $(NAME)
+	$(CL) --output $(NAME) --dump ! --lisp sbcl --quicklisp --dispatch-system $(NAME)/nix --system $(NAME)
 
 install: $(NAME)
-	@ln -sf $(SCRIPT) $(BINARY)
-	@$(SCRIPT) symlink $(NAME)
-	@rm -f $(BINDIR)/symlink
+	ln -sf $(SCRIPT) $(BINDIR)/nix
 
 clean:
-	@rm -f $(NAME)
+	rm -f $(NAME)
 
