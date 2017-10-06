@@ -2,37 +2,38 @@ nix-lisp
 ========
 
 This utility provides a single `nix` binary for managing your Nixpkgs and NixOS installation. It
-makes it easier—at least for me—to manage my system, instead of memorizing many commands with
-different interfaces.
+makes it easier, at least for me, instead of memorizing many commands with different interfaces.
+
+For the lazy and impatient, the latest version can be
+found [here](https://github.com/ebzzry/nix-lisp/releases/download/v0.0.1/nix). Just drop this file
+in your `PATH`, and off you go. Only x86-64 binaries, for now. If you want to build it yourself,
+read the *Dependencies* and *Installation* sections below.
 
 This program was salvaged from [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into
 a repository of its own, to make it easier to distribute. In this document, the `$` symbol
 represents the user prompt, while the `*` symbol represents the lisp prompt.
 
 
-Building
---------
+Dependencies
+------------
 
-
-### Dependencies
-
-#### System
+### System
 
 - curl
 - make
 
-#### Lisp
+### Lisp
 
-- sbcl >= 1.3.20
-- cl-launch >= 4.1
-- asdf >= 3.2.0
-- quicklisp >= 2017-03-06
-
-
-### Installation
+- sbcl ≥ 1.3.20
+- cl-launch ≥ 4.1
+- asdf ≥ 3.2.0
+- quicklisp ≥ 2017-03-06
 
 
-#### quicklisp and asdf
+Installation
+------------
+
+### quicklisp and asdf
 
 To install Quicklisp, run:
 
@@ -52,7 +53,7 @@ $ git clone https://gitlab.common-lisp.net/asdf/asdf.git ~/common-lisp/asdf
 ```
 
 
-#### nix-lisp
+### nix-lisp
 
 Clone `nix-lisp` to `~/common-lisp/`:
 
