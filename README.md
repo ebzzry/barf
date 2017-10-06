@@ -6,8 +6,9 @@ makes it easier, at least for me, instead of memorizing many commands with diffe
 
 For the lazy and impatient, the latest version can be
 found [here](https://github.com/ebzzry/nix-lisp/releases/download/v0.0.1/nix). Just drop this file
-in your `PATH`, and off you go. Only Linux x86-64 binaries, for now. If you want to build it yourself,
-read the [Dependencies](#dependencies) and [Installation](#installation) sections below.
+in your `PATH`, and off you go. Only Linux x86-64 binaries, for now. You still need the the items
+in [system dependencies](#systemdependencies), for the program to work. If you want to build it
+yourself, read the [Dependencies](#dependencies) and [Installation](#installation) sections below.
 
 This program was salvaged from [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into
 a repository of its own, to make it easier to distribute. In this document, the `$` symbol
@@ -39,7 +40,11 @@ Table of contents
 
 ### <a name="systemdependencies">System</a>
 
+- nix
 - curl
+- git
+- xz-utils
+- bzip2
 - make
 
 ### <a name="lispdependencies">Lisp</a>
