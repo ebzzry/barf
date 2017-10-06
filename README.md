@@ -10,8 +10,12 @@ a repository of its own, to make it easier to distribute. In this document, the 
 represents the user prompt, while the `*` symbol represents the lisp prompt.
 
 
-Prerequisites
--------------
+Building
+--------
+
+
+### Prerequisites
+
 
 - curl
 - sbcl
@@ -20,8 +24,7 @@ Prerequisites
 - quicklisp
 
 
-Building
---------
+### Summary
 
 First, we need to have a working Quicklisp installation. If you don’t have one, run:
 
@@ -41,7 +44,7 @@ $ cd ~/common-lisp
 $ git clone git@github.com:ebzzry/nix-lisp.git
 ```
 
-Next, to install the binary to `~/bin`, run:
+Next, to install the binary to `~/bin/`, run:
 
 ```bash
 $ make install
