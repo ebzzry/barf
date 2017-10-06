@@ -27,6 +27,7 @@
   (subpathname +base-dir+ path))
 
 (defparameter +nixpkgs+ (base-path "nixpkgs/"))
+(defparameter +index+ (base-path "index/"))
 (defparameter +default-nix+ (base-path "nixpkgs/default.nix"))
 
 (defun index-path (name)
@@ -36,14 +37,14 @@
 (defparameter +index-upstream+ (index-path "upstream"))
 (defparameter +index-installed+ (index-path "installed"))
 
-(defun ensure-dotnix ()
-  (ensure-directories-exist +base-dir+))
-
 (defun ensure-nixpkgs ()
-  (ensure-dotnix)
+  (ensure-directories-exist +base-dir+)
   (unless (file-exists-p +default-nix+)
     (with-current-directory (+base-dir+)
       (run/i `(git "clone" ,+http-repository+)))))
+
+(defun ensure-index ()
+  (ensure-directories-exist +index+))
 
 (defun cdx (&rest args)
   (when (>= (length args) 1)
@@ -62,6 +63,7 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
 (exporting-definitions
  (defun nix (args)
    (ensure-nixpkgs)
+   (ensure-index)
    (cond ((null args) (display-usage))
          (t (let ((self (argv0))
                   (op (first args))
