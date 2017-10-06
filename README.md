@@ -6,23 +6,43 @@ makes it easier, at least for me, instead of memorizing many commands with diffe
 
 For the lazy and impatient, the latest version can be
 found [here](https://github.com/ebzzry/nix-lisp/releases/download/v0.0.1/nix). Just drop this file
-in your `PATH`, and off you go. Only x86-64 binaries, for now. If you want to build it yourself,
-read the *Dependencies* and *Installation* sections below.
+in your `PATH`, and off you go. Only Linux x86-64 binaries, for now. If you want to build it yourself,
+read the [Dependencies](#dependencies) and [Installation](#installation) sections below.
 
 This program was salvaged from [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into
 a repository of its own, to make it easier to distribute. In this document, the `$` symbol
 represents the user prompt, while the `*` symbol represents the lisp prompt.
 
 
-Dependencies
-------------
+Table of contents
+-----------------
 
-### System
+- [Dependencies](#dependencies)
+  + [System](#systemdependencies)
+  + [Lisp](#lispdependencies)
+- [Installation](#installation)
+  + [Quicklisp and ASDF](#quicklispasdf)
+  + [nix-lisp](#nixlisp)
+- [Commands](#commands)
+  + [Base commands](#basecommands)
+  + [Channel management](#channelmanagementcommands)
+  + [Channel commands](#channelcommands)
+  + [Upstream commands](#upstreamcommands)
+  + [Querying packages](#querycommands)
+  + [Common commands](#commoncommands)
+  + [Miscellaneous commands](#miscellaneouscommands)
+  + [Prefetch commands](#prefetchcommands)
+
+
+<a name="dependencies">Dependencies</a>
+---------------------------------------
+
+### <a name="systemdependencies">System</a>
 
 - curl
 - make
 
-### Lisp
+### <a name="lispdependencies">Lisp</a>
 
 - sbcl ≥ 1.3.20
 - cl-launch ≥ 4.1
@@ -30,10 +50,10 @@ Dependencies
 - quicklisp ≥ 2017-03-06
 
 
-Installation
-------------
+<a name="installation">Installation</a>
+---------------------------------------
 
-### quicklisp and asdf
+### <a name="quicklispasdf">Quicklisp and ASDF</a>
 
 To install Quicklisp, run:
 
@@ -53,7 +73,7 @@ $ git clone https://gitlab.common-lisp.net/asdf/asdf.git ~/common-lisp/asdf
 ```
 
 
-### nix-lisp
+### <a name="nixlisp">nix-lisp</a>
 
 Clone `nix-lisp` to `~/common-lisp/`:
 
@@ -72,8 +92,8 @@ $ make install
 ```
 
 
-Commands
---------
+<a name="commands">Commands</a>
+-------------------------------
 
 Below are the currently available commands. When an option looks like `<package>` it means it
 accepts at least one *package* argument. When an option looks like `<package?>`it means it accepts
@@ -92,7 +112,7 @@ can be shortened to
 $ nix r-s-u
 ```
 
-### Base
+### <a name="basecommands">Base commands</a>
 
 - `out-path <package>`
 - `which <binary>`
@@ -119,7 +139,7 @@ $ nix r-s-u
 - `garbage-collect-delete`
 
 
-### Channel management
+### <a name="channelmanagementcommands">Channel management</a>
 
 - `channel <options>`
 - `channel-list`
@@ -135,7 +155,7 @@ $ nix r-s-u
 - `root-channel-name`
 
 
-### Channel commands
+### <a name="channelcommands">Channel commands</a>
 
 - `env <options>`
 - `build <options>`
@@ -154,7 +174,8 @@ $ nix r-s-u
 - `search-available <package>`
 - `view-available`
 
-### Upstream (git checkout) comands
+
+### <a name="upstreamcommands">Upstream (git checkout) comands</a>
 
 - `upstream-env <options>`
 - `upstream-build <options>`
@@ -174,7 +195,7 @@ $ nix r-s-u
 - `upstream-view-available`
 
 
-### Query about installed packages
+### <a name="querycommands">Querying packages</a>
 
 - `view-installed`
 - `search-installed <package>`
@@ -183,7 +204,7 @@ $ nix r-s-u
 - `query-installed <package>`
 
 
-### Common commands
+### <a name="commoncommands">Common commands</a>
 
 - `uninstall <package>`
 - `update`
@@ -195,7 +216,7 @@ $ nix r-s-u
 - `full-search <package>`
 
 
-## Miscellany
+## <a name="miscellaneouscommands">Miscellaneous commands</a>
 
 - `view-packages`
 - `make`
@@ -204,7 +225,7 @@ $ nix r-s-u
 - `nixos-version`
 
 
-### Prefetch commands
+### <a name="prefetchcommands">Prefetch commands</a>
 
 - `fetch-url <options>`
 - `fetch-file <options>`
