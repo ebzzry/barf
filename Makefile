@@ -9,7 +9,7 @@ CL=cl-launch
 all: $(NAME)
 
 $(NAME):
-	$(CL) --output $(NAME) --dump ! --lisp sbcl --quicklisp  --system $(NAME) --dispatch-system $(NAME)/nix
+	$(CL) --output $(NAME) --dump ! --lisp sbcl --quicklisp --system $(NAME) --dispatch-system $(NAME)/nix
 
 install: $(NAME)
 	ln -sf $(SCRIPT) $(BINDIR)/nix

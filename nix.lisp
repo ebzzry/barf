@@ -11,7 +11,6 @@
      :cl-ppcre
      :local-time
      :cl-launch/dispatch
-     :nix-lisp/misc
      :nix-lisp/utils)
   (:export #:nix
            #:main))
