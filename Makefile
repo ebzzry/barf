@@ -4,7 +4,7 @@ BINARY=$(BINDIR)/$(NAME)
 SCRIPT=$(PWD)/$(NAME)
 CL=cl-launch
 
-.PHONY: all $(NAME) clean
+.PHONY: all $(NAME) clean uninstall
 
 all: $(NAME)
 
@@ -13,6 +13,9 @@ $(NAME):
 
 install: $(NAME)
 	ln -sf $(SCRIPT) $(BINDIR)/nix
+
+uninstall:
+	rm -f $(BINDIR)/nix
 
 clean:
 	rm -f $(NAME)
