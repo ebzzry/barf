@@ -1,9 +1,9 @@
 nix-lisp
 ========
 
-This utility provides a single `nix` binary for managing your Nixpkgs and NixOS installation. It makes it
-easy—at least for me—to manage my system, instead of memorizing many commands with different
-interfaces.
+This utility provides a single `nix` binary for managing your Nixpkgs and NixOS installation. It
+makes it easier—at least for me—to manage my system, instead of memorizing many commands with
+different interfaces.
 
 This program was salvaged from [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into
 a repository of its own, to make it easier to distribute. In this document, the `$` symbol
@@ -14,19 +14,27 @@ Building
 --------
 
 
-### Prerequisites
+### Dependencies
 
+#### System
 
 - curl
-- sbcl
 - make
-- cl-launch
-- quicklisp
+
+#### Lisp
+
+- sbcl >= 1.3.20
+- cl-launch >= 4.1
+- asdf >= 3.2.0
+- quicklisp >= 2017-03-06
 
 
-### Summary
+### Installation
 
-First, we need to have a working Quicklisp installation. If you don’t have one, run:
+
+#### quicklisp and asdf
+
+To install Quicklisp, run:
 
 ```bash
 $ curl -O https://beta.quicklisp.org/quicklisp.lisp
@@ -36,7 +44,17 @@ $ sbcl --load quicklisp.lisp
 * (quit)
 ```
 
-Next, clone this repo to `~/common-lisp/`:
+To upgrade ASDF to the latest version, run:
+
+```bash
+$ mkdir ~/common-lisp
+$ git clone https://gitlab.common-lisp.net/asdf/asdf.git ~/common-lisp/asdf
+```
+
+
+#### nix-lisp
+
+Clone `nix-lisp` to `~/common-lisp/`:
 
 ```bash
 $ mkdir ~/common-lisp
@@ -44,7 +62,7 @@ $ cd ~/common-lisp
 $ git clone git@github.com:ebzzry/nix-lisp.git
 ```
 
-Next, to install the binary to `~/bin/`, run:
+Finally, to install the `nix` binary to `~/bin/`, run:
 
 ```bash
 $ make install
@@ -93,7 +111,7 @@ $ nix r-s-u
 - `query-root`
 - `closure <package>`
 - `set-flag <options>`
-- `option <optionss>`
+- `option <options>`
 - `gargage-collect`
 - `garbage-collect-delete`
 
