@@ -59,12 +59,14 @@ Clone `nix-lisp` to `~/common-lisp/`:
 ```bash
 $ mkdir ~/common-lisp
 $ cd ~/common-lisp
-$ git clone git@github.com:ebzzry/nix-lisp.git
+$ git clone https://github.com/ebzzry/nix-lisp.git
 ```
 
 Finally, to install the `nix` binary to `~/bin/`, run:
 
 ```bash
+$ mkdir ~/bin
+$ cd nix-lisp
 $ make install
 ```
 
