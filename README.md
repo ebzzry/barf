@@ -88,6 +88,18 @@ $ cd nix-lisp
 $ make install
 ```
 
+On your first run, initialize the databases:
+
+```bash
+$ nix init
+```
+
+Then, from time-to-time keep the index database up-to-date:
+
+```bash
+$ nix index
+```
+
 
 <a name="commands">Commands</a>
 -------------------------------
