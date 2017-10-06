@@ -4,12 +4,6 @@ nix-lisp
 This utility provides a single `nix` binary for managing your Nixpkgs and NixOS installation. It
 makes it easier, at least for me, instead of memorizing many commands with different interfaces.
 
-For the lazy and impatient, the latest version can be
-found [here](https://github.com/ebzzry/nix-lisp/releases/download/v0.0.1/nix). Just drop this file
-in your `PATH`, and off you go. Only Linux x86-64 binaries, for now. You still need the the items
-in [system dependencies](#systemdependencies), for the program to work. If you want to build it
-yourself, read the [Dependencies](#dependencies) and [Installation](#installation) sections below.
-
 This program was salvaged from [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into
 a repository of its own, to make it easier to distribute. In this document, the `$` symbol
 represents the user prompt, while the `*` symbol represents the lisp prompt.
@@ -19,11 +13,10 @@ Table of contents
 -----------------
 
 - [Dependencies](#dependencies)
-  + [System](#systemdependencies)
-  + [Lisp](#lispdependencies)
 - [Installation](#installation)
-  + [Quicklisp and ASDF](#quicklispasdf)
-  + [nix-lisp](#nixlisp)
+  - [From source](#fromsource)
+    * [Quicklisp and ASDF](#quicklispasdf)
+    * [nix-lisp](#nixlisp)
 - [Commands](#commands)
   + [Base commands](#basecommands)
   + [Channel management](#channelmanagementcommands)
@@ -38,19 +31,14 @@ Table of contents
 <a name="dependencies">Dependencies</a>
 ---------------------------------------
 
-### <a name="systemdependencies">System</a>
-
 - nix
 - curl
 - git
 - xz-utils
 - bzip2
 - make
-
-### <a name="lispdependencies">Lisp</a>
-
-- sbcl ≥ 1.3.20
 - cl-launch ≥ 4.1
+- sbcl ≥ 1.3.20
 - asdf ≥ 3.2.0
 - quicklisp ≥ 2017-03-06
 
@@ -58,7 +46,10 @@ Table of contents
 <a name="installation">Installation</a>
 ---------------------------------------
 
-### <a name="quicklispasdf">Quicklisp and ASDF</a>
+
+### <a name="fromsource">From source</a>
+
+#### <a name="quicklispasdf">Quicklisp and ASDF</a>
 
 To install Quicklisp, run:
 
@@ -74,21 +65,22 @@ To upgrade ASDF to the latest version, run:
 
 ```bash
 $ mkdir ~/common-lisp
-$ git clone https://gitlab.common-lisp.net/asdf/asdf.git ~/common-lisp/asdf
+$ cd ~/common-lisp
+$ git clone https://gitlab.common-lisp.net/asdf/asdf.git
 ```
 
 
-### <a name="nixlisp">nix-lisp</a>
+#### <a name="nixlisp">nix-lisp</a>
 
 Clone `nix-lisp` to `~/common-lisp/`:
 
 ```bash
 $ mkdir ~/common-lisp
 $ cd ~/common-lisp
-$ git clone https://github.com/ebzzry/nix-lisp.git
+$ git clone https://github.com/ebzzry/nix-lisp
 ```
 
-Finally, to install the `nix` binary to `~/bin/`, run:
+Finally, to install the `nix` binary to `~/bin/`:
 
 ```bash
 $ mkdir ~/bin
