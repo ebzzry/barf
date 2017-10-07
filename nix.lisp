@@ -18,10 +18,18 @@
 (in-package :nix-lisp/nix)
 
 (defparameter +self+ "nix")
-(defparameter +hostname+ (hostname))
 (defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
 (defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
-(defparameter +base-dir+ (subpathname (user-homedir-pathname) ".nix/"))
+
+(defparameter +hostname+ nil)
+(defun init-hostname ()
+  (setf +hostname+ (hostname)))
+(register-image-restore-hook 'init-hostname t)
+
+(defparameter +base-dir+ nil)
+(defun init-base-dir ()
+  (setf +base-dir+ (subpathname (user-homedir-pathname) ".nix/")))
+(register-image-restore-hook 'init-base-dir t)
 
 (defun base-path (path)
   (subpathname +base-dir+ path))
