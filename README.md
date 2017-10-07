@@ -150,7 +150,7 @@ accepts at least one *package* argument. When an option looks like `<package?>`i
 zero ore more *package* arguments. When a command doesn’t have an argument, it means it doesn’t take
 any.
 
-For convenience, most of the commands can be shorted to its initials, for example:
+For convenience, the commands—aside from the `fetch-*` ones—can be shortened to its initials, for example:
 
 ```bash
 $ nix rebuild-switch-upgrade
