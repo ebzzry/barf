@@ -2,7 +2,8 @@ nix-lisp
 ========
 
 This utility provides a single `nix` binary for managing your Nixpkgs and NixOS installation. It
-makes it easier, at least for me, instead of memorizing many commands with different interfaces.
+makes it easier, at least for me, instead of memorizing many commands with different
+interfaces. This is not exhaustive and only covers the commands listed [here](#commands).
 
 For the lazy and impatient, click [here](#frombinary). Only Linux x86-64 binaries, for now. You
 still need the the items in [system dependencies](#systemdependencies), for the program to work.
@@ -16,10 +17,13 @@ Table of contents
 -----------------
 
 - [Dependencies](#dependencies)
+  + [Nix](#installnix)
+  + [Build dependencies](#builddependencies)
+  + [Runtime dependencies](#runtimedependencies)
 - [Installation](#installation)
-  - [From binary](#frombinary)
-  - [From source](#fromsource)
-  - [Initialize the databases](#initialize)
+  + [From binary](#frombinary)
+  + [From source](#fromsource)
+  + [Initialize the databases](#initialize)
 - [Commands](#commands)
   + [Base commands](#basecommands)
   + [Channel management](#channelmanagementcommands)
@@ -35,7 +39,16 @@ Table of contents
 <a name="dependencies">Dependencies</a>
 ---------------------------------------
 
-- nix
+### <a name="installnix">Nix</a>
+
+If you don’t have Nix, yet, run:
+
+```bash
+$ curl https://nixos.org/nix/install | bash
+```
+
+### <a name="builddependencies">Build dependencies</a>
+
 - curl
 - git
 - xz-utils
@@ -47,9 +60,26 @@ Table of contents
 - quicklisp ≥ 2017-03-06
 
 
+### <a name="runtimedependencies">Runtime dependencies</a>
+
+These are the required minimum for running `nix` on a regular basis:
+
+- curl
+- git
+- xz-utils
+- sudo
+
+If you are going to use the `fetch-*` commands, install the following, too:
+
+- subversion
+- mercurial
+- zip
+- bzr
+- cvs
+
+
 <a name="installation">Installation</a>
 ---------------------------------------
-
 
 ### <a name="frombinary">From binary</a>
 
@@ -57,7 +87,7 @@ Download the latest release:
 
 ```bash
 $ mkdir ~/bin
-$ curl -o ~/bin/nix https://github.com/ebzzry/nix-lisp/releases/download/v0.0.1/nix
+$ curl -SLo ~/bin/nix https://github.com/ebzzry/nix-lisp/releases/download/v0.0.1/nix
 ```
 
 
@@ -400,7 +430,7 @@ To update the user channel, root channel, upstream nixpkgs checkout, and index d
 $ nix full-update
 ```
 
-To perform the above, then upgrade the whole system:
+To perform the above, then upgrade the whole NixOS system:
 
 ```bash
 $ nix full-upgrade
