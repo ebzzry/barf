@@ -150,125 +150,113 @@ accepts at least one *package* argument. When an option looks like `<package?>`i
 zero ore more *package* arguments. When a command doesn’t have an argument, it means it doesn’t take
 any.
 
-For convenience, the commands—aside from the `fetch-*` ones—can be shortened to its initials, for example:
-
-```bash
-$ nix rebuild-switch-upgrade
-```
-
-can be shortened to
-
-```bash
-$ nix r-s-u
-```
+The `|` indicates an alternative, shorter name.
 
 ### <a name="basecommands">Base commands</a>
 
-- `out-path <package>`
+- `out-path|o-p <package>`
 - `which <binary>`
 - `store <options>`
 - `repl`
-- `shell`
+- `pure-shell|shell`
 - `impure-shell`
 - `rebuild`
-- `rebuild-switch`
-- `rebuild-switch-upgrade`
+- `rebuild-switch|r-s`
+- `rebuild-switch-upgrade|r-s-u`
 - `instantiate`
 - `eval <expression>`
 - `grep <string>`
 - `find <package>`
-- `install-package <location>`
-- `install-package-uri <location>`
-- `references <package>`
-- `referrers <package>`
-- `query-root`
-- `closure <package>`
-- `set-flag <options>`
-- `option <options>`
-- `garbage-collect`
-- `garbage-collect-delete`
+- `install-package|i-p <location>`
+- `install-package-uri|i-p-u <location>`
+- `references|r <package>`
+- `referrers|R <package>`
+- `query-root|q-r`
+- `closure|c <package>`
+- `set-flag|s-f <options>`
+- `option|o <options>`
+- `garbage-collect|g-c`
+- `garbage-collect-delete|g-c-d`
 
 
 ### <a name="channelmanagementcommands">Channel management</a>
 
-- `channel <options>`
-- `channel-list`
-- `channel-add <url> <name>`
-- `channel-remove <name>`
-- `channel-update`
-- `channel-name`
-- `root-channel <options>`
-- `root-channel-list`
-- `root-channel-add <url> <name>`
-- `root-channel-remove <name>`
-- `root-channel-update`
-- `root-channel-name`
+- `channel|ch <options>`
+- `channel-list|ch-l`
+- `channel-add|ch-a <url> <name>`
+- `channel-remove|ch-r <name>`
+- `channel-update|ch-u`
+- `channel-name|ch-n`
+- `root-channel|r-ch <options>`
+- `root-channel-list|r-ch-l`
+- `root-channel-add|r-ch-a <url> <name>`
+- `root-channel-remove|r-ch-r <name>`
+- `root-channel-update|r-ch-u`
+- `root-channel-name|r-ch-n`
 
 
 ### <a name="channelcommands">Channel commands</a>
 
-- `env <options>`
-- `build <options>`
-- `query <package>`
-- `upgrade <package?>`
-- `upgrade-always <package?>`
-- `install <package>`
-- `Install <package>`
-- `query-available`
-- `compare-versions`
-- `compare-versions-less-than`
-- `compare-versions-equal`
-- `compare-versions-greater-than`
-- `describe-available`
-- `index-available`
-- `search-available <package>`
-- `view-available`
+- `env|e <options>`
+- `build|b <options>`
+- `query|q <package>`
+- `upgrade|U <package?>`
+- `upgrade-always|U-a <package?>`
+- `install|i <package>`
+- `Install|I <package>`
+- `query-available|q-a`
+- `compare-versions|c-v`
+- `compare-versions-less-than|c-v-l-t`
+- `compare-versions-equal|c-v-e`
+- `compare-versions-greater-than|c-v-g-t`
+- `describe-available|d-a`
+- `index-available|i-a`
+- `search-available|search|s-a|s <package>`
+- `view-available|v-a`
 
 
-### <a name="upstreamcommands">Upstream (git checkout) commands</a>
+### <a name="upstreamcommands">Upstream commands</a>
 
-- `upstream-env <options>`
-- `upstream-build <options>`
-- `upstream-query <package>`
-- `upstream-upgrade <package?>`
-- `upstream-upgrade-always <package?>`
-- `upstream-install <package>`
-- `upstream-Install <package>`
-- `upstream-query-available`
-- `upstream-compare-versions`
-- `upstream-compare-versions-less-than`
-- `upstream-compare-versions-equal`
-- `upstream-compare-versions-greater-than`
-- `upstream-describe-available`
-- `upstream-index-available`
-- `upstream-search-available <package>`
-- `upstream-view-available`
+- `upstream-env|u-e <options>`
+- `upstream-build|u-b <options>`
+- `upstream-query|u-q <package>`
+- `upstream-upgrade|u-U <package?>`
+- `upstream-upgrade-always|u-U-a <package?>`
+- `upstream-install|u-i <package>`
+- `upstream-Install|u-I <package>`
+- `upstream-query-available|u-q-a`
+- `upstream-compare-versions|u-c-v`
+- `upstream-compare-versions-less-than|u-c-v-l-t`
+- `upstream-compare-versions-equal|u-c-v-e`
+- `upstream-compare-versions-greater-than|u-c-v-g-t`
+- `upstream-describe-available|u-d-a`
+- `upstream-index-available|u-i-a`
+- `upstream-search-available|u-s-a <package>`
+- `upstream-view-available|u-v-a`
 
 
 ### <a name="querycommands">Querying packages</a>
 
-- `view-installed`
-- `search-installed <package>`
-- `index-installed`
-- `describe-installed`
-- `query-installed <package>`
+- `view-installed|v-i`
+- `search-installed|s-i <package>`
+- `index-installed|i-i`
+- `describe-installed|d-i`
+- `query-installed|q-i <package>`
 
 
 ### <a name="commoncommands">Common commands</a>
 
-- `uninstall <package>`
-- `update`
-- `root-update`
-- `upstream-update`
-- `index <package>`
-- `full-update`
-- `full-upgrade`
-- `full-search <package>`
+- `uninstall|remove <package>`
+- `build-index|index <package>`
+- `upstream-update|u-u`
+- `full-update|f-u|complete-update`
+- `full-upgrade|f-U|complete-upgrade`
+- `full-search|f-s <package>`
 
 
 ## <a name="miscellaneouscommands">Miscellaneous commands</a>
 
-- `view-packages`
+- `view-packages|v-p`
 - `make`
 - `nix-version`
 - `nixpkgs-version`
