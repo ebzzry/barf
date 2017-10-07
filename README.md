@@ -6,7 +6,7 @@ makes it easier, at least for me, instead of memorizing many commands with diffe
 interfaces. This is not exhaustive and only covers the commands listed [here](#commands).
 
 For the lazy and impatient, click [here](#frombinary). Only Linux x86-64 binaries, for now. You
-still need the the items in [system dependencies](#systemdependencies), for the program to work.
+still need the the items in [runtime dependencies](#runtimedependencies), for the program to work.
 
 This program was salvaged from [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into
 a repository of its own, to make it easier to distribute. In this document, the `$` symbol
@@ -87,7 +87,7 @@ Download the latest release:
 
 ```bash
 $ mkdir ~/bin
-$ curl -SLo ~/bin/nix https://github.com/ebzzry/nix-lisp/releases/download/v0.0.1/nix
+$ curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.1/nix-0.0.1-linux-x86_64.tar.gz | tar -C ~/bin xf -
 ```
 
 
@@ -134,8 +134,8 @@ On your first run, initialize the databases for the upstream nixpkgs checkout an
 $ nix init
 ```
 
-Periodically, run the following command to update the databases for the aforementioned databases,
-plus the channels for the user and root:
+Periodically, run the following command to update the aforementioned databases, plus the channels
+for the user and root:
 
 ```bash
 $ nix full-update
@@ -148,9 +148,7 @@ $ nix full-update
 Below are the currently available commands. When an option looks like `<package>` it means it
 accepts at least one *package* argument. When an option looks like `<package?>`it means it accepts
 zero ore more *package* arguments. When a command doesn’t have an argument, it means it doesn’t take
-any.
-
-The `|` indicates an alternative, shorter name.
+any. The `|` indicates an alternative, shorter name.
 
 ### <a name="basecommands">Base commands</a>
 
