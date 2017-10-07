@@ -9,14 +9,14 @@ CL=cl-launch
 all: $(NAME)
 
 $(NAME):
-	$(CL) --output $(PWD)/$(NAME) --dump ! --lisp sbcl --quicklisp --system $(NAME) --dispatch-system $(NAME)/nix
+	@$(CL) --output $(PWD)/$(NAME) --dump ! --lisp sbcl --quicklisp --system $(NAME) --dispatch-system $(NAME)/nix
 
 install: $(NAME)
-	ln -sf $(SCRIPT) $(BINDIR)/nix
+	@ln -sf $(SCRIPT) $(BINDIR)/nix
 
 uninstall:
-	rm -f $(BINDIR)/nix
+	@rm -f $(BINDIR)/nix
 
 clean:
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
