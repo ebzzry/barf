@@ -251,7 +251,7 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                  (run/i `(,self "query" "--installed" ,@a)))
 
                 ;; common
-                ((ppcre "^(uninstall|ui)$")
+                ((ppcre "^(uninstall|remove)$")
                  (run/i `(,self "env" "--uninstall" ,@a)))
                 ((ppcre "^(update|u)$")
                  (run/i `(,self "channel-update" ,@a)))
