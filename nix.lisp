@@ -93,7 +93,7 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                 ((ppcre "^(which)$")
                  (run `(command-not-found ,@a))
                  (success))
-                ((ppcre "^(store|s)$")
+                ((ppcre "^(store)$")
                  (run/i `(nix-store ,@a))
                  (success))
                 ((ppcre "^(repl)$")
