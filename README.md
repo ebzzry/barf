@@ -4,6 +4,9 @@ nix-lisp
 This utility provides a single `nix` binary for managing your Nixpkgs and NixOS installation. It
 makes it easier, at least for me, instead of memorizing many commands with different interfaces.
 
+For the lazy and impatient, click [here](#frombinary). Only Linux x86-64 binaries, for now. You
+still need the the items in [system dependencies](#systemdependencies), for the program to work.
+
 This program was salvaged from [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into
 a repository of its own, to make it easier to distribute. In this document, the `$` symbol
 represents the user prompt, while the `*` symbol represents the lisp prompt.
@@ -14,9 +17,8 @@ Table of contents
 
 - [Dependencies](#dependencies)
 - [Installation](#installation)
+  - [From binary](#frombinary)
   - [From source](#fromsource)
-    * [Quicklisp and ASDF](#quicklispasdf)
-    * [nix-lisp](#nixlisp)
 - [Commands](#commands)
   + [Base commands](#basecommands)
   + [Channel management](#channelmanagementcommands)
@@ -47,11 +49,19 @@ Table of contents
 ---------------------------------------
 
 
+### <a name="frombinary">From binary</a>
+
+Download the latest release:
+
+```bash
+$ mkdir ~/bin
+$ curl -o ~/bin/nix https://github.com/ebzzry/nix-lisp/releases/download/v0.0.1/nix
+```
+
+
 ### <a name="fromsource">From source</a>
 
-#### <a name="quicklispasdf">Quicklisp and ASDF</a>
-
-To install Quicklisp, run:
+First, install Quicklisp:
 
 ```bash
 $ curl -O https://beta.quicklisp.org/quicklisp.lisp
@@ -61,7 +71,7 @@ $ sbcl --load quicklisp.lisp
 * (quit)
 ```
 
-To upgrade ASDF to the latest version, run:
+Then, upgrade ASDF to the latest version:
 
 ```bash
 $ mkdir ~/common-lisp
@@ -69,18 +79,13 @@ $ cd ~/common-lisp
 $ git clone https://gitlab.common-lisp.net/asdf/asdf.git
 ```
 
-
-#### <a name="nixlisp">nix-lisp</a>
-
-Clone `nix-lisp` to `~/common-lisp/`:
+While still in `~/common-lisp/`, clone this repo:
 
 ```bash
-$ mkdir ~/common-lisp
-$ cd ~/common-lisp
 $ git clone https://github.com/ebzzry/nix-lisp
 ```
 
-Finally, to install the `nix` binary to `~/bin/`:
+Finally, build the binary, then install it to `~/bin/`:
 
 ```bash
 $ mkdir ~/bin
@@ -88,16 +93,20 @@ $ cd nix-lisp
 $ make install
 ```
 
-On your first run, initialize the databases:
+
+### Initialize the databases
+
+On your first run, initialize the databases for the upstream nixpkgs checkout and index database:
 
 ```bash
 $ nix init
 ```
 
-Then, from time-to-time keep the index database up-to-date:
+Peridiocally, run the following command to update the databases for the aforementioned databases,
+plus the channels for the user and root:
 
 ```bash
-$ nix index
+$ nix full-update
 ```
 
 
