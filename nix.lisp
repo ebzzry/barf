@@ -303,10 +303,10 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                  (run/i `(nix-prefetch-bzr ,@a)))
                 ((ppcre "^(fetch-cvsl|f-c)$")
                  (run/i `(nix-prefetch-cvs ,@a)))))))
-   (success))
-
- (defun main (&rest args)
-   (apply #'nix args)
    (success)))
+
+(defun main (&rest args)
+   (apply #'nix args)
+   (success))
 
 (register-commands :nix-lisp/nix)
