@@ -17,7 +17,7 @@
 
 (in-package :nix-lisp/nix)
 
-(defparameter +self+ "nix")
+(defparameter +self+ (or (argv0) "nix"))
 (defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
 (defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
 
