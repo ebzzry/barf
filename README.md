@@ -153,11 +153,11 @@ any. The `|` indicates an alternative, shorter name.
 ### <a name="basecommands">Base commands</a>
 
 - `out-path|o-p <package>`
-- `which <binary>`
+- `which|h <binary>`
 - `store <options>`
 - `repl`
 - `pure-shell|shell`
-- `impure-shell`
+- `impure-shell|i-s`
 - `rebuild`
 - `rebuild-switch|r-s`
 - `rebuild-switch-upgrade|r-s-u`
@@ -259,6 +259,7 @@ any. The `|` indicates an alternative, shorter name.
 - `nix-version`
 - `nixpkgs-version`
 - `nixos-version`
+- `version`
 
 
 ### <a name="prefetchcommands">Prefetch commands</a>
@@ -315,7 +316,7 @@ $ nix full-search firefox
 To display the version of Nix, Nixpkgs, and NixOS:
 
 ```bash
-$ for i in nix nixpkgs nixos; do nix $i-version; done
+$ nix version
 ```
 
 To view the list of installed packages, using the index:
