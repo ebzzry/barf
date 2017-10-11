@@ -87,7 +87,7 @@ Download the latest release:
 
 ```bash
 $ mkdir ~/bin
-$ curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.1/nix-0.0.1-linux-x86_64.tar.gz | tar -C ~/bin xf -
+$ curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.2/nix-0.0.2-linux-x86_64.tar.gz | tar -C ~/bin xf -
 ```
 
 
