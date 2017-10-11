@@ -286,6 +286,9 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                  (nix `("instantiate" "--eval" "<nixpkgs>" "-A" "lib.nixpkgsVersion")))
                 ((ppcre "^(nixos-version)$")
                  (run/i `(nixos-version)))
+                ((ppcre "^(version)$")
+                 (loop :for command :in '("nix" "nixpkgs" "nixos")
+                    :do (nix `(,(format nil "~A-version" command)))))
 
                 ;; prefetch
                 ((ppcre "^(fetch-url)$")
