@@ -51,7 +51,6 @@ $ curl https://nixos.org/nix/install | bash
 
 - curl
 - git
-- xz-utils
 - bzip2
 - make
 - cl-launch ≥ 4.1
@@ -66,7 +65,6 @@ These are the required minimum for running `nix` on a regular basis:
 
 - curl
 - git
-- xz-utils
 - sudo
 
 If you are going to use the `fetch-*` commands, install the following, too:
@@ -87,7 +85,7 @@ Download the latest release:
 
 ```bash
 $ mkdir ~/bin
-$ curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.3/nix-0.0.3-linux-x86_64.tar.gz | tar -C ~/bin xf -
+$ curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.4/nix-0.0.4-linux-x86_64.tar.gz | tar -C ~/bin xf -
 ```
 
 
