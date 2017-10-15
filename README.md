@@ -85,14 +85,14 @@ Download the latest release for Linux:
 
 ```bash
 $ mkdir ~/bin
-$ curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.4/nix-0.0.4-linux-x86_64.tar.gz | tar -C ~/bin xf -
+$ curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.4/nix-0.0.4-linux-x86_64.tar.gz | tar -C ~/bin -xf -
 ```
 
 Download the latest release for macOS:
 
 ```bash
 $ mkdir ~/bin
-$ curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.4/nix-0.0.4-macos-x86_64.tar.gz | tar -C ~/bin xf -
+$ curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.4/nix-0.0.4-macos-x86_64.tar.gz | tar -C ~/bin -xf -
 ```
 
 

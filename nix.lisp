@@ -171,7 +171,8 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
 
                 ;; channels
                 ((ppcre "^(env|e)$")
-                 (run/i `(nix-env ,@a)))
+                 ;; (run/i `(nix-env ,@a))
+                 (run `(nix-env ,@a) :error-output t :on-error nil))
                 ((ppcre "^(build|b)$")
                  (run/i `(nix-build ,@a)))
                 ((ppcre "^(query|q)$")
