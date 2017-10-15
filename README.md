@@ -5,9 +5,6 @@ This utility provides a single `nix` binary for managing your Nixpkgs and NixOS 
 makes it easier, at least for me, instead of memorizing many commands with different
 interfaces. This is not exhaustive and only covers the commands listed [here](#commands).
 
-For the lazy and impatient, click [here](#frombinary). You still need the the items in
-[runtime dependencies](#runtimedependencies), for the program to work.
-
 This program was salvaged from [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into
 a repository of its own, to make it easier to distribute. In this document, the `$` symbol
 represents the user prompt, while the `*` symbol represents the lisp prompt.
@@ -21,7 +18,6 @@ Table of contents
   + [Build dependencies](#builddependencies)
   + [Runtime dependencies](#runtimedependencies)
 - [Installation](#installation)
-  + [From binary](#frombinary)
   + [From source](#fromsource)
   + [Initialize the databases](#initialize)
 - [Commands](#commands)
@@ -78,21 +74,6 @@ If you are going to use the `fetch-*` commands, install the following, too:
 
 <a name="installation">Installation</a>
 ---------------------------------------
-
-### <a name="frombinary">From binary</a>
-
-Download the latest release for Linux:
-
-```bash
-$ mkdir ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.5/nix-0.0.5-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
-```
-
-Download the latest release for macOS:
-
-```bash
-$ mkdir ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.4/nix-0.0.4-macos-x86_64.tar.gz | tar -C ~/bin -xzf -
-```
-
 
 ### <a name="fromsource">From source</a>
 
