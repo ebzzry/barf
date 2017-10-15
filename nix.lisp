@@ -18,7 +18,7 @@
 (in-package :nix-lisp/nix)
 
 (defparameter +self+ (or (argv0) "nix"))
-(defparameter +version+ "0.0.4")
+(defparameter +version+ "0.0.5")
 (defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
 (defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
 
@@ -55,6 +55,9 @@
 (defun ensure-index ()
   (ensure-directories-exist +index+)
   (run/i `(,(argv0) "index")))
+
+(defun nixosp ()
+  (file-exists-p "/etc/nixos/configuration.nix"))
 
 (defun cdx (&rest args)
   (when (>= (length args) 1)
@@ -154,7 +157,7 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                     (format t "~A~%" name))))
 
                 ((ppcre "^(root-channel|r-ch)$")
-                 (run/i `(sudo "nix-channel" ,@a)))
+                 (and (nixosp) (run/i `(sudo "nix-channel" ,@a))))
                 ((ppcre "^(root-channel-list|r-ch-l)$")
                  (nix `("root-channel" "--list" ,@a)))
                 ((ppcre "^(root-channel-add|r-ch-a)$")

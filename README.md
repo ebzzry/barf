@@ -85,7 +85,7 @@ Download the latest release for Linux:
 
 ```bash
 $ mkdir ~/bin
-$ curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.4/nix-0.0.4-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
+$ curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.5/nix-0.0.5-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
 ```
 
 Download the latest release for macOS:
