@@ -84,13 +84,13 @@ If you are going to use the `fetch-*` commands, install the following, too:
 Download the latest release for Linux:
 
 ```bash
-$ mkdir ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.5/nix-0.0.5-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
+$ mkdir ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.9/nix-0.0.9-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
 ```
 
 Download the latest release for macOS:
 
 ```bash
-$ mkdir ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.4/nix-0.0.4-macos-x86_64.tar.gz | tar -C ~/bin -xzf -
+$ mkdir ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.9/nix-0.0.9-macos-x86_64.tar.gz | tar -C ~/bin -xzf -
 ```
 
 
@@ -144,6 +144,8 @@ On your first run, initialize the databases for the upstream nixpkgs checkout an
 ```bash
 $ nix init
 ```
+
+Bear in mind that re-running `init` will purge the index and package databases.
 
 Periodically, run the following command to update the aforementioned databases, plus the channels
 for the user and root:
