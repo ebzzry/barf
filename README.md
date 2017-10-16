@@ -84,15 +84,8 @@ If you are going to use the `fetch-*` commands, install the following, too:
 Download the latest release for Linux:
 
 ```bash
-$ mkdir ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.9/nix-0.0.9-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
+$ mkdir ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.10/nix-0.0.10-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
 ```
-
-Download the latest release for macOS:
-
-```bash
-$ mkdir ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.9/nix-0.0.9-macos-x86_64.tar.gz | tar -C ~/bin -xzf -
-```
-
 
 ### <a name="fromsource">From source</a>
 
@@ -118,14 +111,6 @@ While still in `~/common-lisp/`, clone this repo:
 
 ```bash
 $ git clone https://github.com/ebzzry/nix-lisp
-```
-
-If you’re on macOS, you need to install cl-launch:
-
-```bash
-$ git clone https://github.com/fare/cl-launch.git
-$ cd cl-launch
-$ make install
 ```
 
 Finally, build the binary, then install it to `~/bin/`:
