@@ -18,7 +18,7 @@
 (in-package :nix-lisp/nix)
 
 (defparameter +self+ (or (argv0) "nix"))
-(defparameter +version+ "0.0.6")
+(defparameter +version+ "0.0.7")
 (defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
 (defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
 
@@ -35,17 +35,18 @@
 (defun index-installed () (index-path "installed"))
 
 (defun ensure-nixpkgs ()
+  (delete-directory-tree (nixpkgs))
   (ensure-directories-exist (base-dir))
   (unless (file-exists-p (default-nix))
     (with-current-directory ((base-dir))
       (run/i `(git "clone" ,+http-repository+)))))
 
 (defun ensure-index ()
+  (delete-directory-tree (index))
   (ensure-directories-exist (index))
   (run/i `(,(argv0) "index")))
 
-(defun nixosp ()
-  (file-exists-p "/etc/nixos/configuration.nix"))
+(defun nixosp () (file-exists-p "/etc/nixos/configuration.nix"))
 
 (defun cdx (&rest args)
   (when (>= (length args) 1)
