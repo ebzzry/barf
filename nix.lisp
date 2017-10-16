@@ -35,14 +35,16 @@
 (defun index-installed () (index-path "installed"))
 
 (defun ensure-nixpkgs ()
-  (delete-directory-tree (physicalize-pathname (nixpkgs)) :validate t)
+  (and (directory-exists-p (nixpkgs))
+       (delete-directory-tree (physicalize-pathname (nixpkgs)) :validate t))
   (ensure-directories-exist (base-dir))
   (unless (file-exists-p (default-nix))
     (with-current-directory ((base-dir))
       (run/i `(git "clone" ,+http-repository+)))))
 
 (defun ensure-index ()
-  (delete-directory-tree (physicalize-pathname (index)) :validate t)
+  (and (directory-exists-p (index))
+       (delete-directory-tree physicalize-pathname (index) :validate t))
   (ensure-directories-exist (index))
   (run/i `(,(argv0) "index")))
 
