@@ -18,7 +18,7 @@
 (in-package :nix-lisp/nix)
 
 (defparameter +self+ (or (argv0) "nix"))
-(defparameter +version+ "0.0.9")
+(defparameter +version+ "0.0.10")
 (defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
 (defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
 
@@ -44,7 +44,7 @@
 
 (defun ensure-index ()
   (and (directory-exists-p (index))
-       (delete-directory-tree physicalize-pathname (index) :validate t))
+       (delete-directory-tree (physicalize-pathname (index)) :validate t))
   (ensure-directories-exist (index))
   (run/i `(,(argv0) "index")))
 
@@ -166,7 +166,7 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                 ;; channels
                 ((ppcre "^(env|e)$")
                  ;; (run/i `(nix-env ,@a))
-                 (run `(nix-env ,@a) :error-output t :on-error nil))
+                 (run/i `(nix-env ,@a)))
                 ((ppcre "^(build|b)$")
                  (run/i `(nix-build ,@a)))
                 ((ppcre "^(query|q)$")
