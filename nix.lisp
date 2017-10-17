@@ -18,7 +18,7 @@
 (in-package :nix-lisp/nix)
 
 (defparameter +self+ (or (argv0) "nix"))
-(defparameter +version+ "0.0.10")
+(defparameter +version+ "0.0.11")
 (defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
 (defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
 
@@ -165,7 +165,6 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
 
                 ;; channels
                 ((ppcre "^(env|e)$")
-                 ;; (run/i `(nix-env ,@a))
                  (run/i `(nix-env ,@a)))
                 ((ppcre "^(build|b)$")
                  (run/i `(nix-build ,@a)))
@@ -195,9 +194,9 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                 ((ppcre "^(describe-available|d-a)$")
                  (nix `("query-available" "--description" ,@a)))
                 ((ppcre "^(index-available|i-a)$")
-                 (run `(pipe (nix ("query-available")) (gzip "-c" (> ,(index-channels))))))
+                 (run/i `(pipe (nix ("query-available")) (gzip "-c" (> ,(index-channels))))))
                 ((ppcre "^(search-available|search|s-a|s)$")
-                 (run `(zgrep "--color" "-i" ,@a ,(index-channels)) :error-output nil :on-error nil))
+                 (run/i `(zgrep "--color" "-i" ,@a ,(index-channels))))
                 ((ppcre "^(view-available|v-a)$")
                  (run/i `(zless ,(index-channels))))
 
@@ -229,9 +228,9 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                 ((ppcre "^(upstream-describe-available|u-d-a)$")
                  (nix `("upstream-query-available" "--description" ,@a)))
                 ((ppcre "^(upstream-index-available|u-i-a)$")
-                 (run `(pipe (nix ("upstream-query-available")) (gzip "-c" (> ,(index-upstream))))))
+                 (run/i `(pipe (nix ("upstream-query-available")) (gzip "-c" (> ,(index-upstream))))))
                 ((ppcre "^(upstream-search-available|u-search|u-s-a|u-s)$")
-                 (run `(zgrep "--color" "-i" ,@a ,(index-upstream)) :error-output nil :on-error nil))
+                 (run/i `(zgrep "--color" "-i" ,@a ,(index-upstream))))
                 ((ppcre "^(upstream-view-available|u-v-a)$")
                  (run/i `(zless ,(index-upstream))))
 
@@ -239,10 +238,9 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                 ((ppcre "^(view-installed|v-i)$")
                  (run/i `(zless ,(index-installed))))
                 ((ppcre "^(search-installed|s-i)$")
-                 (run `(zgrep "--color" "-i" ,@a ,(index-installed))
-                      :error-output nil :on-error nil))
+                 (run/i `(zgrep "--color" "-i" ,@a ,(index-installed))))
                 ((ppcre "^(index-installed|i-i)$")
-                 (run `(pipe (nix ("query-installed")) (gzip "-c" (> ,(index-installed))))))
+                 (run/i `(pipe (nix ("query-installed")) (gzip "-c" (> ,(index-installed))))))
                 ((ppcre "^(describe-installed|d-i)$")
                  (nix `("query-installed" "--description" ,@a)))
                 ((ppcre "^(query-installed|q-i)$")
