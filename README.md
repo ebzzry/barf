@@ -84,7 +84,7 @@ If you are going to use the `fetch-*` commands, install the following, too:
 Download the latest release for Linux:
 
 ```bash
-$ mkdir ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.11/nix-0.0.11-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
+$ mkdir -p ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.11/nix-0.0.11-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
 ```
 
 ### <a name="fromsource">From source</a>
@@ -102,7 +102,7 @@ $ sbcl --load quicklisp.lisp
 Then, upgrade ASDF to the latest version:
 
 ```bash
-$ mkdir ~/common-lisp
+$ mkdir -p ~/common-lisp
 $ cd ~/common-lisp
 $ git clone https://gitlab.common-lisp.net/asdf/asdf.git
 ```
@@ -116,7 +116,7 @@ $ git clone https://github.com/ebzzry/nix-lisp
 Finally, build the binary, then install it to `~/bin/`:
 
 ```bash
-$ mkdir ~/bin
+$ mkdir -p ~/bin
 $ cd nix-lisp
 $ make install
 ```
