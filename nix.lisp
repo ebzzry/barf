@@ -18,7 +18,7 @@
 (in-package :nix-lisp/nix)
 
 (defparameter +self+ (or (argv0) "nix"))
-(defparameter +version+ "0.0.12")
+(defparameter +version+ "0.0.13")
 (defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
 (defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
 
@@ -132,7 +132,7 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                 ((ppcre "^(garbage-collect|g-c)$")
                  (nix `("store" "--gc" ,@a)))
                 ((ppcre "^(garbage-collect-delete|g-c-d)$")
-                 (run! `(sudo "nix-collect-garbage -d" ,@a)))
+                 (run! `(sudo "nix-collect-garbage" "-d" ,@a)))
 
                 ((ppcre "^(channel|ch)$")
                  (run! `(nix-channel ,@a)))
