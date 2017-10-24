@@ -115,11 +115,10 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                 ((ppcre "^(install-package-uri|i-p-u)$")
                  (nix `("install-package" "--non-interactive" "--url" ,@a)))
 
-                ;; TODO
                 ((ppcre "^(references|r)$")
-                 (nix `("store" "-q" "--references" ,(run/ss `(,self "out-path" ,(last a))))))
+                 (nix `("store" "-q" "--references" ,@a)))
                 ((ppcre "^(referrers|R)$")
-                 (nix `("store" "-q" "--referrers" ,(run/ss `(,self "out-path" ,(last a))))))
+                 (nix `("store" "-q" "--referrers" ,@a)))
 
                 ((ppcre "^(query-root|q-r)$")
                  (run! `(sudo "nix-env" "--query" ,@a)))
