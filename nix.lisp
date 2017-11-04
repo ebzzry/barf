@@ -18,7 +18,7 @@
 (in-package :nix-lisp/nix)
 
 (defparameter +self+ (or (argv0) "nix"))
-(defparameter +version+ "0.0.13")
+(defparameter +version+ "0.0.14")
 (defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
 (defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
 
@@ -80,7 +80,6 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                 ((ppcre "^(cd)$")
                  (apply #'cdx `(,(nixpkgs) ,@a)))
 
-                 ;; TODO
                 ((ppcre "^(out-path|o-p)$")
                  (match (run/ss `(,self "query" "--out-path" ,(last a)))
                    ((ppcre ".*? (/.*)" path) (format t "~A~%" path))))
@@ -143,7 +142,6 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                  (nix `("channel" "--remove" ,@a)))
                 ((ppcre "^(channel-update|ch-u)$")
                  (nix `("channel" "--update" ,@a)))
-                ;; TODO
                 ((ppcre "^(channel-name|ch-n)$")
                  (match (run/ss `(,self "channel-list" ,@a))
                    ((ppcre "^(.*?) .*" name)
@@ -159,7 +157,6 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                  (nix `("root-channel" "--remove" ,@a)))
                 ((ppcre "^(root-channel-update|r-ch-u)$")
                  (nix `("root-channel" "--update" ,@a)))
-                ;; TODO
                 ((ppcre "^(root-channel-name|r-ch-n)$")
                  (match (run/ss `(,self "root-channel-list" ,@a))
                    ((ppcre "^(.*?) .*" name)
@@ -176,7 +173,6 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
                  (nix `("env" "--upgrade" ,@a)))
                 ((ppcre "^(upgrade-always|U-a)$")
                  (nix `("upgrade" "--always" ,@a)))
-                ;; TODO
                 ((ppcre "^(install|i)$")
                  (nix `("env" "--install" "-A"
                                 ,@(loop :for pkg :in a
@@ -270,7 +266,6 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
 
                 ;; miscellany
 
-                ;; TODO
                 ((ppcre "^(view-packages|v-p)$")
                  (nix `("query-available" "-A" ,(format nil "~A.~A" (run/ss `(,self "channel-name")) (first a)))))
 
