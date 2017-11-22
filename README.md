@@ -84,7 +84,7 @@ If you are going to use the `fetch-*` commands, install the following, too:
 Download the latest release for Linux:
 
 ```bash
-$ mkdir -p ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.14/nix-0.0.14-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
+$ mkdir -p ~/bin; curl -SL https://github.com/ebzzry/nix-lisp/releases/download/v0.0.15/nix-0.0.15-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
 ```
 
 ### <a name="fromsource">From source</a>
