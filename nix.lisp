@@ -18,7 +18,7 @@
 (in-package :nix-lisp/nix)
 
 (defparameter +self+ (or (argv0) "nix"))
-(defparameter +version+ "0.0.14")
+(defparameter +version+ "0.0.15")
 (defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
 (defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
 
@@ -268,6 +268,8 @@ See https://github.com/ebzzry/nix-lisp for more information~%"
 
                 ((ppcre "^(view-packages|v-p)$")
                  (nix `("query-available" "-A" ,(format nil "~A.~A" (run/ss `(,self "channel-name")) (first a)))))
+                ((ppcre "^(upstream-view-packages|u-v-p)$")
+                 (nix `("upstream-query-available" "-A" ,(first a))))
 
                 ((ppcre "^(make)$")
                  (nix `("pure-shell" "--run" "make" ,@a)))
