@@ -68,13 +68,7 @@ These are the required minimum for running `baf` on a regular basis:
 - git
 - sudo
 
-If you are going to use the `fetch-*` commands, install the following, too:
-
-- subversion
-- mercurial
-- zip
-- bzr
-- cvs
+If you are going to use the `fetch-*` commands, you'll need `nix-prefetch-scripts`
 
 
 <a name="installation">Installation</a>
@@ -82,7 +76,7 @@ If you are going to use the `fetch-*` commands, install the following, too:
 
 ### <a name="frombinary">From binary</a>
 
-Download the latest release for Linux:
+Download the latest release for Linux (non NixOS):
 
 ```bash
 $ mkdir -p ~/bin; curl -SL https://github.com/ebzzry/baf/releases/download/v0.0.15/baf-0.0.15-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
@@ -97,25 +91,19 @@ $ curl -O https://beta.quicklisp.org/quicklisp.lisp
 $ sbcl --load quicklisp.lisp --eval '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (sb-ext:quit))'
 ```
 
-Then, upgrade ASDF to the latest version:
+Then, clone ASDF and this repo:
 
 ```bash
 $ mkdir -p ~/common-lisp
-$ git clone https://gitlab.common-lisp.net/asdf/asdf.git ~/common-lisp/asdf
+$ git clone https://gitlab.common-lisp.net/asdf/asdf ~/common-lisp/asdf
+$ git clone https://github.com/ebzzry/baf ~/common-lisp/baf
 ```
 
-While still in `~/common-lisp/`, clone this repo:
-
-```bash
-$ git clone https://github.com/ebzzry/baf
-```
-
-Finally, build the binary, then install it to `~/bin/`:
+Finally, build and install baf:
 
 ```bash
 $ mkdir -p ~/bin
-$ cd baf
-$ make install
+$ make -C ~/common-lisp/baf install
 ```
 
 
