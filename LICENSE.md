@@ -1,7 +1,7 @@
 The MIT License (MIT)
 =====================
 
-ⓒ 2017 Rommel M. Martinez
+© 2017 Rommel M. Martinez
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

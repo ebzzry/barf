@@ -1,4 +1,4 @@
-(uiop:define-package :nix-lisp/utils
+(uiop:define-package :baf/utils
     (:use :cl
           :uiop
           :inferior-shell
@@ -14,7 +14,7 @@
            #:psg-lines
            #:find-binary))
 
-(in-package :nix-lisp/utils)
+(in-package :baf/utils)
 
 (defun home (path)
   (subpathname (user-homedir-pathname) path))

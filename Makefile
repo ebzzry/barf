@@ -1,4 +1,4 @@
-NAME=nix-lisp
+NAME=baf
 BINDIR=$(HOME)/bin
 BINARY=$(BINDIR)/$(NAME)
 SCRIPT=$(PWD)/$(NAME)
@@ -9,13 +9,13 @@ CL=cl-launch
 all: $(NAME)
 
 $(NAME):
-	@$(CL) --output $(PWD)/$(NAME) --dump ! --lisp sbcl --quicklisp --system $(NAME) --dispatch-system $(NAME)/nix
+	@$(CL) --output $(PWD)/$(NAME) --dump ! --lisp sbcl --quicklisp --system $(NAME) --dispatch-system $(NAME)/baf
 
 install: $(NAME)
-	@ln -sf $(SCRIPT) $(BINDIR)/nix
+	@ln -sf $(SCRIPT) $(BINDIR)/baf
 
 uninstall:
-	@rm -f $(BINDIR)/nix
+	@rm -f $(BINDIR)/baf
 
 clean:
 	@rm -f $(NAME)
