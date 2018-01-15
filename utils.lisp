@@ -4,7 +4,6 @@
           :inferior-shell
           :cl-scripting
           :fare-utils
-          :local-time
           :cl-launch/dispatch)
   (:export #:home
            #:err

@@ -9,7 +9,6 @@
      :optima
      :optima.ppcre
      :cl-ppcre
-     :local-time
      :cl-launch/dispatch
      :baf/utils)
   (:export #:baf
