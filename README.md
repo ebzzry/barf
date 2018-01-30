@@ -120,7 +120,7 @@ any. The `|` indicates an alternative, shorter name.
 
 ### <a name="channelcommands">Channel commands</a>
 
-- `env|e <options>`
+- `env <options>`
 - `build|b <options>`
 - `query|q <package>`
 - `upgrade|U <package?>`
@@ -169,7 +169,7 @@ any. The `|` indicates an alternative, shorter name.
 
 ### <a name="commoncommands">Common commands</a>
 
-- `uninstall|remove <package>`
+- `uninstall|remove|e <package>`
 - `build-index|index <package>`
 - `upstream-update|u-u`
 - `full-update|f-u|complete-update`

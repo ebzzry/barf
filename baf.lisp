@@ -170,7 +170,7 @@ See https://github.com/ebzzry/baf for more information~%"
                     (format t "~A~%" name))))
 
                 ;; channels
-                ((ppcre "^(env|e)$")
+                ((ppcre "^(env)$")
                  (run! `(nix-env ,@a)))
                 ((ppcre "^(build|b)$")
                  (run! `(nix-build ,@a)))
@@ -252,7 +252,7 @@ See https://github.com/ebzzry/baf for more information~%"
                  (baf `("query" "--installed" ,@a)))
 
                 ;; common
-                ((ppcre "^(uninstall|remove)$")
+                ((ppcre "^(uninstall|remove|e)$")
                  (baf `("env" "--uninstall" ,@a)))
                 ((ppcre "^(build-index|index)$")
                  (loop :for command :in '("index-available" "upstream-index-available" "index-installed")
