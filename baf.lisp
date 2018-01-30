@@ -66,17 +66,6 @@
 See https://github.com/ebzzry/baf for more information~%"
           +self+))
 
-;; (defun out-path (package)
-;;   "Return out path of PACKAGE"
-;;   (match (run/ss `(baf "query" "--out-path" ,package))
-;;     ((ppcre ".*? (/.*)" path) (format nil "~A~%" path))))
-
-;; (defun out-path (package)
-;;   "Return out path of PACKAGE"
-;;   (match (with-output-to-string (out)
-;;            (baf (list "query" "--out-path" package)))
-;;     ((ppcre ".*? (/.*)" path) (format nil "~A~%" path))))
-
 (exporting-definitions
  (defun baf (args)
    (cond ((null args) (display-usage))
