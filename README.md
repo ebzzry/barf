@@ -14,9 +14,7 @@ Table of contents
 -----------------
 
 - [Installation](#installation)
-  + [From source](#fromsource)
-  + [From binary](#frombinary)
-  + [Initialization](#initialization)
+- [Initialization](#initialization)
 - [Commands](#commands)
   + [Base commands](#basecommands)
   + [Channel management](#channelmanagementcommands)
@@ -32,8 +30,6 @@ Table of contents
 
 <a name="installation">Installation</a>
 ---------------------------------------
-
-### <a name="fromsource">From source</a>
 
 Install the dependencies on Debian and NixOS systems, respectively:
 
@@ -51,15 +47,9 @@ Then install baf:
 mkdir -p ~/bin ~/common-lisp; git clone https://github.com/fare/asdf ~/common-lisp/asdf; git clone https://github.com/ebzzry/baf ~/common-lisp/baf; curl -O https://beta.quicklisp.org/quicklisp.lisp; sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (sb-ext:quit))'; make -C ~/common-lisp/baf install
 ```
 
-### <a name="frombinary">From binary</a>
 
-Download the latest release for non-NixOS Linuxes with:
-
-```bash
-mkdir -p ~/bin; curl -SL https://github.com/ebzzry/baf/releases/download/v0.0.15/baf-0.0.15-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
-```
-
-### <a name="initialization">Initialization</a>
+<a name="initialization">Initialization</a>
+-------------------------------------------
 
 On your first run, initialize the databases for the upstream nixpkgs checkout and index database:
 
@@ -366,4 +356,10 @@ In order for the `which` command to work on NixOS, put this in `/etc/nixos/confi
 
 ```
 programs.command-not-found.enable = true;
+```
+
+To update baf to the latest version:
+
+```bash
+cd ~/common-lisp/baf; git pull origin master; make install
 ```
