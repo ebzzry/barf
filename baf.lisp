@@ -66,6 +66,17 @@
 See https://github.com/ebzzry/baf for more information~%"
           +self+))
 
+;; (defun out-path (package)
+;;   "Return out path of PACKAGE"
+;;   (match (run/ss `(baf "query" "--out-path" ,package))
+;;     ((ppcre ".*? (/.*)" path) (format nil "~A~%" path))))
+
+;; (defun out-path (package)
+;;   "Return out path of PACKAGE"
+;;   (match (with-output-to-string (out)
+;;            (baf (list "query" "--out-path" package)))
+;;     ((ppcre ".*? (/.*)" path) (format nil "~A~%" path))))
+
 (exporting-definitions
  (defun baf (args)
    (cond ((null args) (display-usage))
@@ -78,11 +89,19 @@ See https://github.com/ebzzry/baf for more information~%"
                  (ensure-index))
                 ((ppcre "^(cd)$")
                  (apply #'cdx `(,(nixpkgs) ,@a)))
-
                 ((ppcre "^(out-path|o-p)$")
                  (match (run/ss `(,self "query" "--out-path" ,(last a)))
                    ((ppcre ".*? (/.*)" path) (format t "~A~%" path))))
-
+                ((ppcre "^(ls)$")
+                 (let* ((item (first (last a)))
+                        (position (position #\/ item))
+                        (length (length item))
+                        (package (subseq item 0 (or position length)))
+                        (sub-directory (if position (subseq item position length) ""))
+                        (location (match (run/ss `(,self "query" "--out-path" ,package))
+                                    ((ppcre ".*? (/.*)" path) (format nil "~A" path)))))
+                   (when location
+                     (run! `(ls ,@(butlast a) ,(concatenate 'string location sub-directory))))))
                 ((ppcre "^(which|h)$")
                  (run! `(command-not-found ,@a)))
                 ((ppcre "^(store)$")
@@ -174,8 +193,8 @@ See https://github.com/ebzzry/baf for more information~%"
                  (baf `("upgrade" "--always" ,@a)))
                 ((ppcre "^(install|i)$")
                  (baf `("env" "--install" "-A"
-                                ,@(loop :for pkg :in a
-                                     :collect (format nil "~A.~A" (run/ss `(,self "channel-name")) pkg)))))
+                              ,@(loop :for pkg :in a
+                                   :collect (format nil "~A.~A" (run/ss `(,self "channel-name")) pkg)))))
                 ((ppcre "^(Install|I)$")
                  (baf `("env" "--install" "-A" ,@a)))
                 ((ppcre "^(query-available|q-a)$")
@@ -304,7 +323,7 @@ See https://github.com/ebzzry/baf for more information~%"
    (success)))
 
 (defun main (&rest args)
-   (apply #'baf args)
-   (success))
+  (apply #'baf args)
+  (success))
 
 (register-commands :baf/baf)
