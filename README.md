@@ -45,7 +45,7 @@ Table of contents
 If you don’t have Nix, yet, run:
 
 ```bash
-$ curl https://nixos.org/nix/install | bash
+curl https://nixos.org/nix/install | bash
 ```
 
 ### <a name="builddependencies">Build dependencies</a>
@@ -79,7 +79,7 @@ If you are going to use the `fetch-*` commands, you'll need `nix-prefetch-script
 Download the latest release for Linux (non NixOS):
 
 ```bash
-$ mkdir -p ~/bin; curl -SL https://github.com/ebzzry/baf/releases/download/v0.0.15/baf-0.0.15-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
+mkdir -p ~/bin; curl -SL https://github.com/ebzzry/baf/releases/download/v0.0.15/baf-0.0.15-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
 ```
 
 ### <a name="fromsource">From source</a>
@@ -87,17 +87,17 @@ $ mkdir -p ~/bin; curl -SL https://github.com/ebzzry/baf/releases/download/v0.0.
 Install the dependencies on Debian and NixOS systems, respectively:
 
 ```bash
-$ sudo apt-get install -y git sbcl make curl cl-launch
+sudo apt-get install -y git sbcl make curl cl-launch
 ```
 
 ```bash
-$ nix-env -i git sbcl gnumake curl cl-launch
+nix-env -i git sbcl gnumake curl cl-launch
 ```
 
 Then install baf:
 
 ```bash
-$ mkdir -p ~/bin ~/common-lisp; git clone https://github.com/fare/asdf ~/common-lisp/asdf; git clone https://github.com/ebzzry/baf ~/common-lisp/baf; curl -O https://beta.quicklisp.org/quicklisp.lisp; sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (sb-ext:quit))'; make -C ~/common-lisp/baf install
+mkdir -p ~/bin ~/common-lisp; git clone https://github.com/fare/asdf ~/common-lisp/asdf; git clone https://github.com/ebzzry/baf ~/common-lisp/baf; curl -O https://beta.quicklisp.org/quicklisp.lisp; sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (sb-ext:quit))'; make -C ~/common-lisp/baf install
 ```
 
 ### <a name="initialize">Initialize the databases</a>
@@ -105,7 +105,7 @@ $ mkdir -p ~/bin ~/common-lisp; git clone https://github.com/fare/asdf ~/common-
 On your first run, initialize the databases for the upstream nixpkgs checkout and index database:
 
 ```bash
-$ baf init
+baf init
 ```
 
 Bear in mind that re-running `init` will purge the index and package databases.
@@ -114,7 +114,7 @@ Periodically, run the following command to update the aforementioned databases, 
 for the user and root:
 
 ```bash
-$ baf full-update
+baf full-update
 ```
 
 
@@ -256,147 +256,147 @@ any. The `|` indicates an alternative, shorter name.
 To install the latest Firefox from upstream:
 
 ```bash
-$ baf upstream-install firefox
+baf upstream-install firefox
 ```
 
 To install the latest Firefox from channels:
 
 ```bash
-$ baf install firefox
+baf install firefox
 ```
 
 To uninstall it:
 
 ```bash
-$ baf remove firefox
+baf remove firefox
 ```
 
 To search for upstream packages with the name `firefox`:
 
 ```bash
-$ baf upstream-search firefox
+baf upstream-search firefox
 ```
 
 To search for channel packages with the name `firefox`:
 
 ```bash
-$ baf search firefox
+baf search firefox
 ```
 
 To search for packages from both upstream and channels, with the name `firefox`:
 
 ```bash
-$ baf full-search firefox
+baf full-search firefox
 ```
 
 To display the version of Nix, Nixpkgs, and NixOS:
 
 ```bash
-$ baf version
+baf version
 ```
 
 To view the list of installed packages, using the index:
 
 ```bash
-$ baf view-installed
+baf view-installed
 ```
 
 To view the list of installed packages, using querying:
 
 ```bash
-$ baf query-installed
+baf query-installed
 ```
 
 To view the list of installed packages, including description:
 
 ```bash
-$ baf describe-installed
+baf describe-installed
 ```
 
 To view the Haskell packages:
 
 ```bash
-$ baf view-packages haskellPackages
+baf view-packages haskellPackages
 ```
 
 To search if `firefox` installed:
 
 ```bash
-$ baf search-installed firefox
+baf search-installed firefox
 ```
 
 To know which package has the binary `firefox`:
 
 ```bash
-$ baf which firefox
+baf which firefox
 ```
 
 To get the store path of the `firefox` binary available in your PATH:
 
 ```bash
-$ baf out-path firefox
+baf out-path firefox
 ```
 
 To look for files in the upstream containing the string `firefox`:
 
 ```bash
-$ baf find firefox
+baf find firefox
 ```
 
 To grep the case insensitive string `firefox` in the upstream, displaying the name of the matching file:
 
 ```bash
-$ baf grep -iH firefox
+baf grep -iH firefox
 ```
 
 To garbage collect:
 
 ```bash
-$ baf garbage-collect
+baf garbage-collect
 ```
 
 To aggressively garbage collect:
 
 ```bash
-$ baf garbage-collect-delete
+baf garbage-collect-delete
 ```
 
 To subscribe to the `nixos-unstable` channel for the current user:
 
 ```bash
-$ baf channel-add https://nixos.org/channels/nixos-unstable nixos
-$ baf channel-update
+baf channel-add https://nixos.org/channels/nixos-unstable nixos
+baf channel-update
 ```
 
 To subscribe to the `nixos-unstable` channel for root:
 
 ```bash
-$ baf root-channel-add https://nixos.org/channels/nixos-unstable nixos
-$ baf root-channel-update
+baf root-channel-add https://nixos.org/channels/nixos-unstable nixos
+baf root-channel-update
 ```
 
 To rebuild NixOS from `/etc/nixos/configuration.nix` then perform switch:
 
 ```bash
-$ baf rebuild-switch
+baf rebuild-switch
 ```
 
 To rebuild NixOS from `/etc/nixos/configuration.nix`, perform switch, and upgrade:
 
 ```bash
-$ baf rebuild-switch-upgrade
+baf rebuild-switch-upgrade
 ```
 
 To update the user channel, root channel, upstream nixpkgs checkout, and index database:
 
 ```bash
-$ baf full-update
+baf full-update
 ```
 
 To perform the above, then upgrade the whole NixOS system:
 
 ```bash
-$ baf full-upgrade
+baf full-upgrade
 ```
 
 
