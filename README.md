@@ -44,6 +44,18 @@ nix-env -i git sbcl gnumake curl cl-launch bzip2 nix-prefetch-scripts
 Then install baf:
 
 ```bash
+mkdir -p ~/bin ~/common-lisp
+git clone https://github.com/fare/asdf ~/common-lisp/asdf
+git clone https://github.com/ebzzry/baf ~/common-lisp/baf
+curl -O https://beta.quicklisp.org/quicklisp.lisp
+sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (sb-ext:quit))'
+make -C ~/common-lisp/baf install
+```
+
+
+Or, in one line:
+
+```bash
 mkdir -p ~/bin ~/common-lisp; git clone https://github.com/fare/asdf ~/common-lisp/asdf; git clone https://github.com/ebzzry/baf ~/common-lisp/baf; curl -O https://beta.quicklisp.org/quicklisp.lisp; sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (sb-ext:quit))'; make -C ~/common-lisp/baf install
 ```
 
