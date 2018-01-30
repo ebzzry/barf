@@ -84,28 +84,21 @@ $ mkdir -p ~/bin; curl -SL https://github.com/ebzzry/baf/releases/download/v0.0.
 
 ### <a name="fromsource">From source</a>
 
-First, install Quicklisp:
+Install the dependencies on Debian and NixOS systems, respectively:
 
 ```bash
-$ curl -O https://beta.quicklisp.org/quicklisp.lisp
-$ sbcl --load quicklisp.lisp --eval '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (sb-ext:quit))'
+$ sudo apt-get install -y git sbcl make curl cl-launch
 ```
-
-Then, clone ASDF and this repo:
 
 ```bash
-$ mkdir -p ~/common-lisp
-$ git clone https://gitlab.common-lisp.net/asdf/asdf ~/common-lisp/asdf
-$ git clone https://github.com/ebzzry/baf ~/common-lisp/baf
+$ nix-env -i git sbcl gnumake curl cl-launch
 ```
 
-Finally, build and install baf:
+Then install baf:
 
 ```bash
-$ mkdir -p ~/bin
-$ make -C ~/common-lisp/baf install
+$ mkdir -p ~/bin ~/common-lisp; git clone https://github.com/fare/asdf ~/common-lisp/asdf; git clone https://github.com/ebzzry/baf ~/common-lisp/baf; curl -O https://beta.quicklisp.org/quicklisp.lisp; sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (sb-ext:quit))'; make -C ~/common-lisp/baf install
 ```
-
 
 ### <a name="initialize">Initialize the databases</a>
 
