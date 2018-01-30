@@ -5,9 +5,6 @@ This utility provides a single `baf` binary for managing your Nixpkgs and NixOS 
 makes it easier, at least for me, instead of memorizing many commands with different
 interfaces. This is not exhaustive and only covers the commands listed [here](#commands).
 
-For the lazy and impatient, click [here](#frombinary). You still need the the items in
-[runtime dependencies](#runtimedependencies), for the program to work.
-
 This program was salvaged from [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into
 a repository of its own, to make it easier to distribute. In this document, the `$` symbol
 represents the user prompt, while the `*` symbol represents the lisp prompt.
@@ -16,14 +13,10 @@ represents the user prompt, while the `*` symbol represents the lisp prompt.
 Table of contents
 -----------------
 
-- [Dependencies](#dependencies)
-  + [Nix](#installnix)
-  + [Build dependencies](#builddependencies)
-  + [Runtime dependencies](#runtimedependencies)
 - [Installation](#installation)
   + [From source](#fromsource)
   + [From binary](#frombinary)
-  + [Initialize the databases](#initialize)
+  + [Initialization](#initialization)
 - [Commands](#commands)
   + [Base commands](#basecommands)
   + [Channel management](#channelmanagementcommands)
@@ -37,61 +30,19 @@ Table of contents
 - [Notes](#notes)
 
 
-<a name="dependencies">Dependencies</a>
----------------------------------------
-
-### <a name="installnix">Nix</a>
-
-If you don’t have Nix, yet, run:
-
-```bash
-curl https://nixos.org/nix/install | bash
-```
-
-### <a name="builddependencies">Build dependencies</a>
-
-- curl
-- git
-- bzip2
-- make
-- cl-launch ≥ 4.1
-- sbcl ≥ 1.3.20
-- asdf ≥ 3.2.0
-- quicklisp ≥ 2017-03-06
-
-
-### <a name="runtimedependencies">Runtime dependencies</a>
-
-These are the required minimum for running `baf` on a regular basis:
-
-- curl
-- git
-- sudo
-
-If you are going to use the `fetch-*` commands, you'll need `nix-prefetch-scripts`
-
-
 <a name="installation">Installation</a>
 ---------------------------------------
-
-### <a name="frombinary">From binary</a>
-
-Download the latest release for Linux (non NixOS):
-
-```bash
-mkdir -p ~/bin; curl -SL https://github.com/ebzzry/baf/releases/download/v0.0.15/baf-0.0.15-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
-```
 
 ### <a name="fromsource">From source</a>
 
 Install the dependencies on Debian and NixOS systems, respectively:
 
 ```bash
-sudo apt-get install -y git sbcl make curl cl-launch
+sudo apt-get install -y git sbcl make curl cl-launch bzip2
 ```
 
 ```bash
-nix-env -i git sbcl gnumake curl cl-launch
+nix-env -i git sbcl gnumake curl cl-launch bzip2 nix-prefetch-scripts
 ```
 
 Then install baf:
@@ -100,7 +51,15 @@ Then install baf:
 mkdir -p ~/bin ~/common-lisp; git clone https://github.com/fare/asdf ~/common-lisp/asdf; git clone https://github.com/ebzzry/baf ~/common-lisp/baf; curl -O https://beta.quicklisp.org/quicklisp.lisp; sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (sb-ext:quit))'; make -C ~/common-lisp/baf install
 ```
 
-### <a name="initialize">Initialize the databases</a>
+### <a name="frombinary">From binary</a>
+
+Download the latest release for non-NixOS Linuxes with:
+
+```bash
+mkdir -p ~/bin; curl -SL https://github.com/ebzzry/baf/releases/download/v0.0.15/baf-0.0.15-linux-x86_64.tar.gz | tar -C ~/bin -xzf -
+```
+
+### <a name="initialization">Initialization</a>
 
 On your first run, initialize the databases for the upstream nixpkgs checkout and index database:
 
