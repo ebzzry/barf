@@ -181,7 +181,7 @@ any. The `|` indicates an alternative, shorter name.
 
 ### <a name="commoncommands">Common commands</a>
 
-- `uninstall|remove|e <package>`
+- `uninstall|remove|erase|e <package>`
 - `build-index|index <package>`
 - `upstream-update|u-u`
 - `full-update|f-u|complete-update`
