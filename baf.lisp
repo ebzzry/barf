@@ -209,7 +209,7 @@ See https://github.com/ebzzry/baf for more information~%"
                  (run! `(zless ,(index-channels))))
 
                 ;; upstream
-                ((ppcre "^(upstream-env|u-e)$")
+                ((ppcre "^(upstream-env|u-env)$")
                  (baf `("env" "-f" ,(default-nix) ,@a)))
                 ((ppcre "^(upstream-build|u-b)$")
                  (baf `("build" "-I" ,(format nil "nixpkgs=~A" (nixpkgs)) ,@a)))
