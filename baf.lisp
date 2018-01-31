@@ -252,7 +252,7 @@ See https://github.com/ebzzry/baf for more information~%"
                  (baf `("query" "--installed" ,@a)))
 
                 ;; common
-                ((ppcre "^(uninstall|remove|e)$")
+                ((ppcre "^(uninstall|remove|erase|e)$")
                  (baf `("env" "--uninstall" ,@a)))
                 ((ppcre "^(build-index|index)$")
                  (loop :for command :in '("index-available" "upstream-index-available" "index-installed")
@@ -272,7 +272,6 @@ See https://github.com/ebzzry/baf for more information~%"
                     :do (baf `(,command ,@a))))
 
                 ;; miscellany
-
                 ((ppcre "^(view-packages|v-p)$")
                  (baf `("query-available" "-A" ,(format nil "~A.~A" (run/ss `(,self "channel-name")) (first a)))))
                 ((ppcre "^(upstream-view-packages|u-v-p)$")
@@ -307,8 +306,7 @@ See https://github.com/ebzzry/baf for more information~%"
                  (run! `(nix-prefetch-bzr ,@a)))
                 ((ppcre "^(fetch-cvs)$")
                  (run! `(nix-prefetch-cvs ,@a)))
-                (else (display-usage)))
-              )))
+                (else (display-usage))))))
    (success)))
 
 (defun main (&rest args)
