@@ -326,4 +326,4 @@ In order for the `which` command to work on NixOS, put this in `/etc/nixos/confi
 
 To update baf to the latest version:
 
-    cd ~/common-lisp/baf; git pull origin master; make install
+    cd ~/common-lisp/baf; git pull --rebase origin master; make install
