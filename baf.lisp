@@ -17,7 +17,7 @@
 (in-package :baf/baf)
 
 (defparameter +self+ (or (argv0) "baf"))
-(defparameter +version+ "0.0.15")
+(defparameter +version+ "0.0.16")
 (defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
 (defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
 
@@ -182,8 +182,8 @@ See https://github.com/ebzzry/baf for more information~%"
                  (baf `("upgrade" "--always" ,@a)))
                 ((ppcre "^(install|i)$")
                  (baf `("env" "--install" "-A"
-                              ,@(loop :for pkg :in a
-                                   :collect (format nil "~A.~A" (run/ss `(,self "channel-name")) pkg)))))
+                              ,@(loop :for name :in a
+                                   :collect (format nil "~A.~A" (run/ss `(,self "channel-name")) name)))))
                 ((ppcre "^(Install|I)$")
                  (baf `("env" "--install" "-A" ,@a)))
                 ((ppcre "^(query-available|q-a)$")
@@ -204,7 +204,7 @@ See https://github.com/ebzzry/baf for more information~%"
                 ((ppcre "^(index-available|i-a)$")
                  (run! `(pipe (baf ("query-available")) (gzip "-c" (> ,(index-channels))))))
                 ((ppcre "^(search-available|search|s-a|s)$")
-                 (run! `(zgrep "--color" "-i" ,@a ,(index-channels))))
+                 (loop :for name :in a :do (run! `(zgrep "--color" "-i" ,name ,(index-channels)))))
                 ((ppcre "^(view-available|v-a)$")
                  (run! `(zless ,(index-channels))))
 
@@ -241,7 +241,7 @@ See https://github.com/ebzzry/baf for more information~%"
                 ((ppcre "^(upstream-index-available|u-i-a)$")
                  (run! `(pipe (baf ("upstream-query-available")) (gzip "-c" (> ,(index-upstream))))))
                 ((ppcre "^(upstream-search-available|u-search|u-s-a|u-s)$")
-                 (run! `(zgrep "--color" "-i" ,@a ,(index-upstream))))
+                 (loop :for name :in a :do (run! `(zgrep "--color" "-i" ,name ,(index-upstream)))))
                 ((ppcre "^(upstream-view-available|u-v-a)$")
                  (run! `(zless ,(index-upstream))))
 
