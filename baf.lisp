@@ -1,42 +1,96 @@
-(uiop:define-package
-    :baf/baf
-    (:use
-     :cl
-     :fare-utils
-     :uiop
-     :inferior-shell
-     :cl-scripting
-     :optima
-     :optima.ppcre
-     :cl-ppcre
-     :cl-launch/dispatch
-     :baf/utils)
+;;;; baf.lisp
+
+(uiop:define-package :baf/baf
+    (:use #:cl
+          #:fare-utils
+          #:uiop
+          #:inferior-shell
+          #:cl-scripting
+          #:optima
+          #:optima.ppcre
+          #:cl-ppcre
+          #:cl-launch/dispatch
+          #:baf/utils)
   (:export #:baf
            #:main))
 
 (in-package :baf/baf)
 
-(defparameter +self+ (or (argv0) "baf"))
-(defparameter +version+ "0.0.16")
-(defparameter +http-repository+ "https://github.com/NixOS/nixpkgs.git")
-(defparameter +git-repository+ "git@github.com:NixOS/nixpkgs.git")
 
-(defun base-dir () (subpathname (user-homedir-pathname) ".baf/"))
-(defun base-path (path) (subpathname (base-dir) path))
+;;;-------------------------------------------------------------------------------------------------
+;;; Variables
+;;;-------------------------------------------------------------------------------------------------
 
-(defun nixpkgs () (base-path "nixpkgs/"))
-(defun index () (base-path "index/"))
-(defun default-nix () (base-path "nixpkgs/default.nix"))
+(defparameter +self+
+  (or (argv0) "baf")
+  "The name of this program")
 
-(defun index-path (name) (subpathname (base-path "index/") (format nil "~A.~A.gz" name (hostname))))
-(defun index-channels () (index-path "channels"))
-(defun index-upstream () (index-path "upstream"))
-(defun index-installed () (index-path "installed"))
+(defparameter +version+
+  "0.0.16"
+  "The version of this program")
+
+(defparameter +http-repository+
+  "https://github.com/NixOS/nixpkgs.git"
+  "The remote repository for Nixpkgs sources in HTTPS")
+
+(defparameter +git-repository+
+  "git@github.com:NixOS/nixpkgs.git"
+  "The remote repository for Nixpkgs sources in Git")
+
+
+;;;-------------------------------------------------------------------------------------------------
+;;; Functions
+;;;-------------------------------------------------------------------------------------------------
+
+(defun display-usage ()
+  "Display program usage"
+  (format t "Usage: ~A [COMMAND]... [OPTION]...
+
+See https://github.com/ebzzry/baf for more information~%"
+          +self+))
+
+(defun base-dir ()
+  "Return the base directory where to store baf data"
+  (subpathname (user-homedir-pathname) ".baf/"))
+
+(defun base-path (path)
+  "Return a path relative to BASE-DIR"
+  (subpathname (base-dir) path))
+
+(defun nixpkgs ()
+  "Return the local path of the Nixpkgs directory"
+  (base-path "nixpkgs/"))
+
+(defun index ()
+  "Return the local path of the index"
+  (base-path "index/"))
+
+(defun default-nix ()
+  "Return the local path of the top-level Nixpkgs file"
+  (base-path "nixpkgs/default.nix"))
+
+(defun index-path (name)
+  "Return the index file for the current host"
+  (subpathname (base-path "index/") (format nil "~A.~A.gz" name (hostname))))
+
+(defun index-channels ()
+  "Return the index file for the channels"
+  (index-path "channels"))
+
+(defun index-upstream ()
+  "Return the index file for the upstream"
+  (index-path "upstream"))
+
+(defun index-installed ()
+  "Return the index file for installed applications"
+  (index-path "installed"))
 
 (defun run! (cmd)
+  "Run command CMD muffling its errors"
   (run/interactive cmd :on-error nil))
 
 (defun ensure-nixpkgs ()
+  "Fetch the Nixpkgs repository if it does not exist yet"
   (and (directory-exists-p (nixpkgs))
        (delete-directory-tree (physicalize-pathname (nixpkgs)) :validate t))
   (ensure-directories-exist (base-dir))
@@ -45,14 +99,18 @@
       (run/i `(git "clone" ,+http-repository+)))))
 
 (defun ensure-index ()
+  "Build the local index unconditionally"
   (and (directory-exists-p (index))
        (delete-directory-tree (physicalize-pathname (index)) :validate t))
   (ensure-directories-exist (index))
   (run/i `(,(argv0) "index")))
 
-(defun nixosp () (file-exists-p "/etc/nixos/configuration.nix"))
+(defun nixosp ()
+  "Return true if we are on NixOS"
+  (file-exists-p "/etc/nixos/configuration.nix"))
 
 (defun cdx (&rest args)
+  "Change the current shell directory. Nope, does not work"
   (when (>= (length args) 1)
     (let ((directory (first args))
           (arguments (rest args)))
@@ -60,14 +118,9 @@
       (when arguments (run/i arguments))
       (success))))
 
-(defun display-usage ()
-  (format t "Usage: ~A [COMMAND]... [OPTION]...
-
-See https://github.com/ebzzry/baf for more information~%"
-          +self+))
-
 (exporting-definitions
  (defun baf (args)
+   "Top-level command for managing Nix facilities"
    (cond ((null args) (display-usage))
          (t (let ((self (argv0))
                   (op (first args))
@@ -316,6 +369,7 @@ See https://github.com/ebzzry/baf for more information~%"
    (success)))
 
 (defun main (&rest args)
+  "The top-level entry point"
   (apply #'baf args)
   (success))
 
