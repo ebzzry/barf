@@ -69,9 +69,21 @@ See https://github.com/ebzzry/baf for more information~%"
   "Return the local path of the top-level Nixpkgs file"
   (base-path "nixpkgs/default.nix"))
 
+(defun find-machine-id ()
+  "Return the path to the machine-id file"
+  (loop :for path :in '("/etc/machine-id" "/var/lib/dbus/machine-id")
+        :when (uiop:file-exists-p path)
+        :return path))
+
 (defun index-path (name)
   "Return the index file for the current host"
-  (subpathname (base-path "index/") (format nil "~A.~A.gz" name (hostname))))
+  (let* ((base (format nil "~A.~A" name (hostname)))
+         (id-file (or (find-machine-id) ""))
+         (path (if (uiop:file-exists-p id-file)
+                   (format nil "~A.~A.gz" base (string-trim '(#\space #\tab #\newline)
+                                                            (uiop:read-file-string id-file)))
+                   (format nil "~A.gz" base))))
+    (subpathname (base-path "index/") path)))
 
 (defun index-channels ()
   "Return the index file for the channels"
