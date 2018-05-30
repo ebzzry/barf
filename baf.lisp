@@ -26,7 +26,7 @@
   "The name of this program")
 
 (defparameter +version+
-  "0.0.16"
+  "0.0.17"
   "The version of this program")
 
 (defparameter +http-repository+
@@ -313,7 +313,7 @@ See https://github.com/ebzzry/baf for more information~%"
                 ;; common
                 ((ppcre "^(uninstall|remove|erase|e)$")
                  (baf `("env" "--uninstall" ,@a)))
-                ((ppcre "^(build-index|index)$")
+                ((ppcre "^(build-index|b-i|index)$")
                  (loop :for command :in '("index-available" "upstream-index-available" "index-installed")
                     :do (baf `(,command))))
                 ((ppcre "^(upstream-update|u-u)$")
