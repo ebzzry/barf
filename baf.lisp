@@ -336,7 +336,7 @@ See https://github.com/ebzzry/baf for more information~%"
                  (loop :for command :in '("channel-update" "root-channel-update" "upstream-update" "build-index")
                     :do (baf `(,command))))
                 ((ppcre "^(full-upgrade|f-U|complete-upgrade)$")
-                 (loop :for command :in '("full-update" "upstream-upgrade" "rebuild-switch-upgrade")
+                 (loop :for command :in '("full-update" "upgrade" "upstream-upgrade" "rebuild-switch-upgrade")
                     :do (baf `(,command))))
                 ((ppcre "^(full-search|f-s)$")
                  (loop :for command :in '("search-available" "upstream-search-available")

@@ -182,7 +182,7 @@ any. The `|` indicates an alternative, shorter name.
 ### <a name="commoncommands">Common commands</a>
 
 - `uninstall|remove|erase|e <package>`
-- `build-index|index <package>`
+- `build-index|b-i|index <package>`
 - `upstream-update|u-u`
 - `full-update|f-u|complete-update`
 - `full-upgrade|f-U|complete-upgrade`
