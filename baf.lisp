@@ -26,7 +26,7 @@
   "The name of this program")
 
 (defparameter +version+
-  "0.0.17"
+  "0.0.18"
   "The version of this program")
 
 (defparameter +http-repository+
@@ -256,13 +256,13 @@ See https://github.com/ebzzry/baf for more information~%"
                 ((ppcre "^(compare-versions|c-v)$")
                  (baf `("query" "--compare-versions" ,@a)))
                 ((ppcre "^(compare-versions-less-than|c-v-l-t)$")
-                 (run! `(pipe (baf `("compare-versions" ,@a)) (grep "<")))
+                 (run! `(pipe (baf ("compare-versions" ,@a)) (grep "<")))
                  (success))
                 ((ppcre "^(compare-versions-equal|c-v-e)$")
-                 (run! `(pipe (baf `("compare-versions" ,@a)) (grep "=")))
+                 (run! `(pipe (baf ("compare-versions" ,@a)) (grep "=")))
                  (success))
                 ((ppcre "^(compare-versions-greater-than|c-v-g-t)$")
-                 (run! `(pipe (baf `("compare-versions" ,@a)) (grep ">")))
+                 (run! `(pipe (baf ("compare-versions" ,@a)) (grep ">")))
                  (success))
                 ((ppcre "^(describe-available|d-a)$")
                  (baf `("query-available" "--description" ,@a)))
