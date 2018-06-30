@@ -19,4 +19,3 @@ uninstall:
 
 clean:
 	@rm -f $(NAME)
-
