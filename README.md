@@ -218,27 +218,27 @@ any. The `|` indicates an alternative, shorter name.
 
 To install the latest Firefox from upstream:
 
-    baf upstream-install firefox
+    baf u-i firefox
 
 To install the latest Firefox from channels:
 
-    baf install firefox
+    baf i firefox
 
 To uninstall it:
 
-    baf remove firefox
+    baf e firefox
 
 To search for upstream packages with the name `firefox`:
 
-    baf upstream-search firefox
+    baf u-s firefox
 
 To search for channel packages with the name `firefox`:
 
-    baf search firefox
+    baf s firefox
 
 To search for packages from both upstream and channels, with the name `firefox`:
 
-    baf full-search firefox
+    baf f-s firefox
 
 To display the version of Nix, Nixpkgs, and NixOS:
 
@@ -246,27 +246,27 @@ To display the version of Nix, Nixpkgs, and NixOS:
 
 To view the list of installed packages, using the index:
 
-    baf view-installed
+    baf v-i
 
 To view the list of installed packages, using querying:
 
-    baf query-installed
+    baf q-i
 
 To view the list of installed packages, including description:
 
-    baf describe-installed
+    baf d-i
 
-To view the Haskell packages:
+To view the Haskell packages from upstream:
 
-    baf view-packages haskellPackages
+    baf u-v-p haskellPackages
 
 To search if Firefox is installed:
 
-    baf search-installed firefox
+    baf s-i firefox
 
 To install Firefox from upstream on a different profile:
 
-    baf upstream-profile firefox -iA firefox
+    baf u-p firefox -iA firefox
 
 then, to use this version of Firefox:
 
@@ -274,11 +274,11 @@ then, to use this version of Firefox:
 
 To find out which package has the binary `firefox`:
 
-    baf which firefox
+    baf h firefox
 
 To get the store path of Firefox:
 
-    baf out-path firefox
+    baf o-p firefox
 
 To display the `share/` subdirectory of Firefox, with some options to ls:
 
@@ -294,37 +294,37 @@ To grep the case insensitive string `firefox` in the upstream, displaying the na
 
 To garbage collect:
 
-    baf garbage-collect
+    baf g-c
 
 To aggressively garbage collect:
 
-    baf garbage-collect-delete
+    baf g-c-d
 
 To subscribe to the `nixos-unstable` channel for the current user:
 
-    baf channel-add https://nixos.org/channels/nixos-unstable nixos
-    baf channel-update
+    baf ch-a https://nixos.org/channels/nixos-unstable nixos
+    baf ch-u
 
 To subscribe to the `nixos-unstable` channel for root:
 
-    baf root-channel-add https://nixos.org/channels/nixos-unstable nixos
-    baf root-channel-update
+    baf r-ch-a https://nixos.org/channels/nixos-unstable nixos
+    baf r-ch-u
 
 To rebuild NixOS from `/etc/nixos/configuration.nix` then perform switch:
 
-    baf rebuild-switch
+    baf r-s
 
 To rebuild NixOS from `/etc/nixos/configuration.nix`, perform switch, and upgrade:
 
-    baf rebuild-switch-upgrade
+    baf r-s-u
 
 To update the user channel, root channel, upstream nixpkgs checkout, and index database:
 
-    baf full-update
+    baf f-u
 
 To perform the above, then upgrade the whole NixOS system:
 
-    baf full-upgrade
+    baf f-U
 
 
 <a name="notes">Notes</a>
