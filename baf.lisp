@@ -26,7 +26,7 @@
   "The name of this program.")
 
 (defparameter +version+
-  "0.0.20"
+  "0.0.21"
   "The version of this program.")
 
 (defparameter +http-repository+
@@ -87,7 +87,9 @@ See https://github.com/ebzzry/baf for more information~%"
 
 (defun profile-path (path)
   "Return a profile directory."
-  (subpathname (base-path "profiles/") path))
+  (let ((path (subpathname (base-path "profiles/") path)))
+    (ensure-directories-exist path)
+    path))
 
 (defun index-channels ()
   "Return the index file for the channels."
