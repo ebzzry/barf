@@ -23,19 +23,19 @@
 
 (defparameter +self+
   (or (argv0) "baf")
-  "The name of this program")
+  "The name of this program.")
 
 (defparameter +version+
-  "0.0.18"
-  "The version of this program")
+  "0.0.20"
+  "The version of this program.")
 
 (defparameter +http-repository+
   "https://github.com/NixOS/nixpkgs.git"
-  "The remote repository for Nixpkgs sources in HTTPS")
+  "The remote repository for Nixpkgs sources in HTTPS.")
 
 (defparameter +git-repository+
   "git@github.com:NixOS/nixpkgs.git"
-  "The remote repository for Nixpkgs sources in Git")
+  "The remote repository for Nixpkgs sources in Git.")
 
 
 ;;;-------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@
 ;;;-------------------------------------------------------------------------------------------------
 
 (defun display-usage ()
-  "Display program usage"
+  "Display program usage."
   (format t "Usage: ~A [COMMAND]... [OPTION]...
 
 See https://github.com/ebzzry/baf for more information~%"
@@ -54,29 +54,29 @@ See https://github.com/ebzzry/baf for more information~%"
   (subpathname (user-homedir-pathname) ".baf/"))
 
 (defun base-path (path)
-  "Return a path relative to BASE-DIR"
+  "Return a path relative to BASE-DIR."
   (subpathname (base-dir) path))
 
 (defun nixpkgs ()
-  "Return the local path of the Nixpkgs directory"
+  "Return the local path of the Nixpkgs directory."
   (base-path "nixpkgs/"))
 
 (defun index ()
-  "Return the local path of the index"
+  "Return the local path of the index."
   (base-path "index/"))
 
 (defun default-nix ()
-  "Return the local path of the top-level Nixpkgs file"
+  "Return the local path of the top-level Nixpkgs file."
   (base-path "nixpkgs/default.nix"))
 
 (defun find-machine-id ()
-  "Return the path to the machine-id file"
+  "Return the path to the machine-id file."
   (loop :for path :in '("/etc/machine-id" "/var/lib/dbus/machine-id")
         :when (uiop:file-exists-p path)
         :return path))
 
 (defun index-path (name)
-  "Return the index file for the current host"
+  "Return the index file for the current host."
   (let* ((base (format nil "~A.~A" name (hostname)))
          (id-file (or (find-machine-id) ""))
          (path (if (uiop:file-exists-p id-file)
@@ -85,24 +85,28 @@ See https://github.com/ebzzry/baf for more information~%"
                    (format nil "~A.gz" base))))
     (subpathname (base-path "index/") path)))
 
+(defun profile-path (path)
+  "Return a profile directory."
+  (subpathname (base-path "profiles/") path))
+
 (defun index-channels ()
-  "Return the index file for the channels"
+  "Return the index file for the channels."
   (index-path "channels"))
 
 (defun index-upstream ()
-  "Return the index file for the upstream"
+  "Return the index file for the upstream."
   (index-path "upstream"))
 
 (defun index-installed ()
-  "Return the index file for installed applications"
+  "Return the index file for installed applications."
   (index-path "installed"))
 
 (defun run! (cmd)
-  "Run command CMD muffling its errors"
+  "Run command CMD muffling its errors."
   (run/interactive cmd :on-error nil))
 
 (defun ensure-nixpkgs ()
-  "Fetch the Nixpkgs repository if it does not exist yet"
+  "Fetch the Nixpkgs repository if it does not exist yet."
   (and (directory-exists-p (nixpkgs))
        (delete-directory-tree (physicalize-pathname (nixpkgs)) :validate t))
   (ensure-directories-exist (base-dir))
@@ -111,18 +115,18 @@ See https://github.com/ebzzry/baf for more information~%"
       (run/i `(git "clone" ,+http-repository+)))))
 
 (defun ensure-index ()
-  "Build the local index unconditionally"
+  "Build the local index unconditionally."
   (and (directory-exists-p (index))
        (delete-directory-tree (physicalize-pathname (index)) :validate t))
   (ensure-directories-exist (index))
   (run/i `(,(argv0) "index")))
 
 (defun nixosp ()
-  "Return true if we are on NixOS"
+  "Return true if we are on NixOS."
   (file-exists-p "/etc/nixos/configuration.nix"))
 
 (defun cdx (&rest args)
-  "Change the current shell directory. Nope, does not work"
+  "Change the current shell directory. Nope, does not work."
   (when (>= (length args) 1)
     (let ((directory (first args))
           (arguments (rest args)))
@@ -130,9 +134,18 @@ See https://github.com/ebzzry/baf for more information~%"
       (when arguments (run/i arguments))
       (success))))
 
+(defun delete-tree (path)
+  "Delete a directory tree."
+  (let ((path (ensure-directory-pathname path)))
+    (delete-directory-tree path :validate t)))
+
+(defun remove-profile (profile)
+  "Remove a profile path."
+  (delete-tree (profile-path profile)))
+
 (exporting-definitions
  (defun baf (args)
-   "Top-level command for managing Nix facilities"
+   "Top-level command for managing Nix facilities."
    (cond ((null args) (display-usage))
          (t (let ((self (argv0))
                   (op (first args))
@@ -272,6 +285,8 @@ See https://github.com/ebzzry/baf for more information~%"
                  (loop :for name :in a :do (run! `(zgrep "--color" "-i" ,name ,(index-channels)))))
                 ((ppcre "^(view-available|v-a)$")
                  (run! `(zless ,(index-channels))))
+                ((ppcre "^(profile|p)$")
+                 (baf `("env" "-p" ,(profile-path (first a)) ,@a)))
 
                 ;; upstream
                 ((ppcre "^(upstream-env|u-env)$")
@@ -309,6 +324,8 @@ See https://github.com/ebzzry/baf for more information~%"
                  (loop :for name :in a :do (run! `(zgrep "--color" "-i" ,name ,(index-upstream)))))
                 ((ppcre "^(upstream-view-available|u-v-a)$")
                  (run! `(zless ,(index-upstream))))
+                ((ppcre "^(upstream-profile|u-p)$")
+                 (baf `("upstream-env" "-p" ,(profile-path (first a)) ,@a)))
 
                 ;; installed
                 ((ppcre "^(view-installed|v-i)$")
@@ -341,6 +358,8 @@ See https://github.com/ebzzry/baf for more information~%"
                 ((ppcre "^(full-search|f-s)$")
                  (loop :for command :in '("search-available" "upstream-search-available")
                     :do (baf `(,command ,@a))))
+                ((ppcre "^(remove-profile|r-p)$")
+                 (loop :for profile :in a :do (remove-profile profile)))
 
                 ;; miscellany
                 ((ppcre "^(view-packages|v-p)$")
@@ -377,11 +396,11 @@ See https://github.com/ebzzry/baf for more information~%"
                  (run! `(nix-prefetch-bzr ,@a)))
                 ((ppcre "^(fetch-cvs)$")
                  (run! `(nix-prefetch-cvs ,@a)))
-                (else (display-usage))))))
+                (t (display-usage))))))
    (success)))
 
 (defun main (&rest args)
-  "The top-level entry point"
+  "The top-level entry point."
   (apply #'baf args)
   (success))
 

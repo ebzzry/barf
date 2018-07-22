@@ -148,6 +148,7 @@ any. The `|` indicates an alternative, shorter name.
 - `index-available|i-a`
 - `search-available|search|s-a|s <package>`
 - `view-available|v-a`
+- `profile|p <profile>`
 
 
 ### <a name="upstreamcommands">Upstream commands</a>
@@ -168,6 +169,7 @@ any. The `|` indicates an alternative, shorter name.
 - `upstream-index-available|u-i-a`
 - `upstream-search-available|u-s-a <package>`
 - `upstream-view-available|u-v-a`
+- `upstream-profile|u-p <profile>`
 
 
 ### <a name="querycommands">Querying packages</a>
@@ -261,6 +263,14 @@ To view the Haskell packages:
 To search if Firefox is installed:
 
     baf search-installed firefox
+
+To install Firefox from upstream on a different profile:
+
+    baf upstream-profile firefox -iA firefox
+
+then, to use this version of Firefox:
+
+    PATH=$PATH/.baf/profiles/firefox/bin firefox
 
 To find out which package has the binary `firefox`:
 
