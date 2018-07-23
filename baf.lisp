@@ -26,7 +26,7 @@
   "The name of this program.")
 
 (defparameter +version+
-  "0.0.21"
+  "0.0.22"
   "The version of this program.")
 
 (defparameter +http-repository+
@@ -288,7 +288,7 @@ See https://github.com/ebzzry/baf for more information~%"
                 ((ppcre "^(view-available|v-a)$")
                  (run! `(zless ,(index-channels))))
                 ((ppcre "^(profile|p)$")
-                 (baf `("env" "-p" ,(profile-path (first a)) ,@a)))
+                 (baf `("env" "-p" ,(profile-path (first a)) ,@(rest a))))
 
                 ;; upstream
                 ((ppcre "^(upstream-env|u-env)$")
@@ -327,7 +327,7 @@ See https://github.com/ebzzry/baf for more information~%"
                 ((ppcre "^(upstream-view-available|u-v-a)$")
                  (run! `(zless ,(index-upstream))))
                 ((ppcre "^(upstream-profile|u-p)$")
-                 (baf `("upstream-env" "-p" ,(profile-path (first a)) ,@a)))
+                 (baf `("upstream-env" "-p" ,(profile-path (first a)) ,@(rest a))))
 
                 ;; installed
                 ((ppcre "^(view-installed|v-i)$")
