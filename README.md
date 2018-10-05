@@ -174,11 +174,10 @@ any. The `|` indicates an alternative, shorter name.
 
 ### <a name="querycommands">Querying packages</a>
 
-- `view-installed|v-i`
+- `query-installed|q-i <package>`
 - `search-installed|s-i <package>`
 - `index-installed|i-i`
 - `describe-installed|d-i`
-- `query-installed|q-i <package>`
 
 
 ### <a name="commoncommands">Common commands</a>

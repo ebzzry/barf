@@ -26,7 +26,7 @@
   "The name of this program.")
 
 (defparameter +version+
-  "0.0.22"
+  "0.0.23"
   "The version of this program.")
 
 (defparameter +http-repository+
@@ -330,16 +330,14 @@ See https://github.com/ebzzry/baf for more information~%"
                  (baf `("upstream-env" "-p" ,(profile-path (first a)) ,@(rest a))))
 
                 ;; installed
-                ((ppcre "^(view-installed|v-i)$")
-                 (run! `(zless ,(index-installed))))
+                ((ppcre "^(query-installed|q-i)$")
+                 (baf `("query" "--installed" ,@a)))
                 ((ppcre "^(search-installed|s-i)$")
                  (run! `(zgrep "--color" "-i" ,@a ,(index-installed))))
                 ((ppcre "^(index-installed|i-i)$")
                  (run! `(pipe (baf ("query-installed")) (gzip "-c" (> ,(index-installed))))))
                 ((ppcre "^(describe-installed|d-i)$")
                  (baf `("query-installed" "--description" ,@a)))
-                ((ppcre "^(query-installed|q-i)$")
-                 (baf `("query" "--installed" ,@a)))
 
                 ;; common
                 ((ppcre "^(uninstall|remove|erase|e)$")
