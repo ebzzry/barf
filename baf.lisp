@@ -26,7 +26,7 @@
   "The name of this program.")
 
 (defparameter +version+
-  "0.0.23"
+  "0.0.24"
   "The version of this program.")
 
 (defparameter +http-repository+
@@ -378,6 +378,9 @@ See https://github.com/ebzzry/baf for more information~%"
                 ((ppcre "^(version)$")
                  (loop :for command :in '("nix" "nixpkgs" "nixos")
                     :do (baf `(,(format nil "~A-version" command)))))
+                ((ppcre "^(cleanup)$")
+                 (run! `(sudo "nix-collect-garbage" "--delete-older-than" "14d" ,@a))
+                 (baf `("rebuild" "boot")))
 
                 ;; prefetch
                 ((ppcre "^(fetch-url)$")

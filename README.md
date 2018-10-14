@@ -198,6 +198,7 @@ any. The `|` indicates an alternative, shorter name.
 - `nixpkgs-version`
 - `nixos-version`
 - `version`
+- `cleanup`
 
 
 ### <a name="prefetchcommands">Prefetch commands</a>
