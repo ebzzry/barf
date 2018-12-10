@@ -26,7 +26,7 @@
   "The name of this program.")
 
 (defparameter +version+
-  "0.0.24"
+  "0.0.25"
   "The version of this program.")
 
 (defparameter +http-repository+
@@ -372,7 +372,7 @@ See https://github.com/ebzzry/baf for more information~%"
                 ((ppcre "^(nix-version)$")
                  (baf `("env" "--version")))
                 ((ppcre "^(nixpkgs-version)$")
-                 (baf `("instantiate" "--eval" "<nixpkgs>" "-A" "lib.nixpkgsVersion")))
+                 (baf `("instantiate" "--eval" "<nixpkgs>" "-A" "lib.version")))
                 ((ppcre "^(nixos-version)$")
                  (run! `(nixos-version)))
                 ((ppcre "^(version)$")
