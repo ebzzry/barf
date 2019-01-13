@@ -31,14 +31,8 @@ Table of contents
 <a name="installation">Installation</a>
 ---------------------------------------
 
-Install the dependencies on Debian and NixOS systems, respectively:
-
 ```bash
-sudo apt-get install -y git sbcl make curl cl-launch bzip2
-```
-
-```bash
-nix-env -i git sbcl gnumake curl cl-launch bzip2 nix-prefetch-scripts
+nix-env -i git sbcl gnumake curl cl-launch bzip2 nix-prefetch-scripts fd ripgrep
 ```
 
 Then install baf:
@@ -100,8 +94,8 @@ any. The `|` indicates an alternative, shorter name.
 - `rebuild-switch-upgrade|r-s-u`
 - `instantiate`
 - `eval <expression>`
-- `grep <string>`
-- `find <package>`
+- `grep|g <string>`
+- `find|fd <package>`
 - `install-package|i-p <location>`
 - `install-package-uri|i-p-u <location>`
 - `references|r <package>`
@@ -337,3 +331,6 @@ In order for the `which` command to work on NixOS, put this in `/etc/nixos/confi
 To update baf to the latest version:
 
     cd ~/common-lisp/baf; git pull --rebase origin master; make install
+
+baf uses [fd](https://github.com/sharkdp/fd) and [ripgrep](https://github.com/BurntSushi/ripgrep)
+for finding files and text strings.

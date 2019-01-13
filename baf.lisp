@@ -26,7 +26,7 @@
   "The name of this program.")
 
 (defparameter +version+
-  "0.0.25"
+  "0.0.26"
   "The version of this program.")
 
 (defparameter +http-repository+
@@ -191,11 +191,11 @@ See https://github.com/ebzzry/baf for more information~%"
                  (run! `(nix-instantiate ,@a)))
                 ((ppcre "^(eval)$")
                  (baf `("instantiate" "--eval" "--strict" "--show-trace" ,@a)))
-                ((ppcre "^(grep)$")
+                ((ppcre "^(grep|g|rg)$")
                  (with-current-directory ((nixpkgs))
-                   (run! `(find "." "-iname" "*.nix" "-exec" "grep" ,@a "{}" "\;"))))
-                ((ppcre "^(find)$")
-                 (run! `(find ,(nixpkgs) "-iname" ,@a)))
+                   (run! `(fd "--extension" "nix" "--exec" "rg" ,@a "{}"))))
+                ((ppcre "^(find|fd|f)$")
+                 (run! `(fd ,@a ,(nixpkgs))))
                 ((ppcre "^(install-package|i-p)$")
                  (run! `(sudo "nix-install-package" ,@a)))
                 ((ppcre "^(install-package-uri|i-p-u)$")
