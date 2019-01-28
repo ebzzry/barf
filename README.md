@@ -31,9 +31,7 @@ Table of contents
 <a name="installation">Installation</a>
 ---------------------------------------
 
-```bash
-nix-env -i git sbcl gnumake curl cl-launch bzip2 nix-prefetch-scripts fd ripgrep
-```
+    nix-env -i git sbcl gnumake curl cl-launch bzip2 nix-prefetch-scripts fd ripgrep
 
 Then install baf:
 
@@ -59,18 +57,18 @@ mkdir -p ~/bin ~/common-lisp; git clone https://github.com/fare/asdf ~/common-li
 
 On your first run, initialize the databases for the upstream nixpkgs checkout and index database:
 
-```bash
-baf init
-```
+    baf init
 
 Bear in mind that re-running `init` will purge the index and package databases.
 
 Periodically, run the following command to update the aforementioned databases, plus the channels
 for the user and root:
 
-```bash
-baf full-update
-```
+    baf full-update
+
+If you can’t execute root commands as sudo, use the following, instead:
+
+    baf full-user-update
 
 
 <a name="commands">Commands</a>
@@ -180,6 +178,7 @@ any. The `|` indicates an alternative, shorter name.
 - `build-index|b-i|index <package>`
 - `upstream-update|u-u`
 - `full-update|f-u|complete-update`
+- `full-user-update|f-u-u|complete-user-update`
 - `full-upgrade|f-U|complete-upgrade`
 - `full-search|f-s <package>`
 

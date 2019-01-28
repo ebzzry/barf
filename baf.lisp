@@ -26,7 +26,7 @@
   "The name of this program.")
 
 (defparameter +version+
-  "0.0.26"
+  "0.0.27"
   "The version of this program.")
 
 (defparameter +http-repository+
@@ -349,9 +349,12 @@ See https://github.com/ebzzry/baf for more information~%"
                  (with-current-directory ((nixpkgs))
                    (when (string= (run/ss `(git "rev-parse" "--abbrev-ref" "HEAD")) "master")
                      (run! `(git "pull" "origin" "master")))))
+                ((ppcre "^(full-user-update|f-u-u|complete-user-update)$")
+                 (loop :for command :in '("channel-update" "upstream-update" "build-index")
+                    :do (baf `(,command))))
                 ((ppcre "^(full-update|f-u|complete-update)$")
                  (loop :for command :in '("channel-update" "root-channel-update" "upstream-update" "build-index")
-                    :do (baf `(,command))))
+                       :do (baf `(,command))))
                 ((ppcre "^(full-upgrade|f-U|complete-upgrade)$")
                  (loop :for command :in '("full-update" "upgrade" "upstream-upgrade" "rebuild-switch-upgrade")
                     :do (baf `(,command))))
