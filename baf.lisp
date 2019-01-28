@@ -26,7 +26,7 @@
   "The name of this program.")
 
 (defparameter +version+
-  "0.0.27"
+  "0.0.28"
   "The version of this program.")
 
 (defparameter +http-repository+
@@ -332,6 +332,8 @@ See https://github.com/ebzzry/baf for more information~%"
                 ;; installed
                 ((ppcre "^(query-installed|q-i)$")
                  (baf `("query" "--installed" ,@a)))
+                ((ppcre "^(query-installed-names|q-i-n)$")
+                 (run! `(pipe (baf ("query-installed") ,@a) (sed "-e" "s/-[0-9].*//"))))
                 ((ppcre "^(search-installed|s-i)$")
                  (run! `(zgrep "--color" "-i" ,@a ,(index-installed))))
                 ((ppcre "^(index-installed|i-i)$")

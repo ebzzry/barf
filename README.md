@@ -167,6 +167,7 @@ any. The `|` indicates an alternative, shorter name.
 ### <a name="querycommands">Querying packages</a>
 
 - `query-installed|q-i <package>`
+- `query-installed-names|q-i-n <package>`
 - `search-installed|s-i <package>`
 - `index-installed|i-i`
 - `describe-installed|d-i`
