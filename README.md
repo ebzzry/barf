@@ -1,13 +1,16 @@
 baf 🐶
 =====
 
-This utility provides a single `baf` binary for managing your Nixpkgs and NixOS installation. It
-makes it easier, at least for me, instead of memorizing many commands with different
-interfaces. This is not exhaustive and only covers the commands listed [here](#commands).
+This utility provides a single `baf` binary for managing your Nixpkgs and NixOS
+installation. It makes it easier, at least for me, instead of memorizing many
+commands with different interfaces. This is not exhaustive and only covers the
+commands listed [here](#commands).
 
-This program was salvaged from [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into
-a repository of its own, to make it easier to distribute. In this document, the `$` symbol
-represents the user prompt, while the `*` symbol represents the lisp prompt.
+This program was salvaged from
+[ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into a
+repository of its own, to make it easier to distribute. In this document, the
+`$` symbol represents the user prompt, while the `*` symbol represents the lisp
+prompt.
 
 
 Table of contents
@@ -31,9 +34,11 @@ Table of contents
 <a name="installation">Installation</a>
 ---------------------------------------
 
+Install the dependencies:
+
     nix-env -i git sbcl gnumake curl cl-launch bzip2 nix-prefetch-scripts fd ripgrep
 
-Then install baf:
+Then, install baf:
 
 ```bash
 mkdir -p ~/bin ~/common-lisp
@@ -55,14 +60,15 @@ mkdir -p ~/bin ~/common-lisp; git clone https://github.com/fare/asdf ~/common-li
 <a name="initialization">Initialization</a>
 -------------------------------------------
 
-On your first run, initialize the databases for the upstream nixpkgs checkout and index database:
+On your first run, initialize the databases for the upstream nixpkgs checkout
+and index database:
 
     baf init
 
 Bear in mind that re-running `init` will purge the index and package databases.
 
-Periodically, run the following command to update the aforementioned databases, plus the channels
-for the user and root:
+Periodically, run the following command to update the aforementioned databases,
+plus the channels for the user and root:
 
     baf full-update
 
@@ -74,9 +80,10 @@ If you can’t execute root commands as sudo, use the following, instead:
 <a name="commands">Commands</a>
 -------------------------------
 
-Below are the currently available commands. When an option looks like `<package>` it means it
-accepts at least one *package* argument. When an option looks like `<package?>`it means it accepts
-zero ore more *package* arguments. When a command doesn’t have an argument, it means it doesn’t take
+Below are the currently available commands. When an option looks like
+`<package>` it means it accepts at least one *package* argument. When an option
+looks like `<package?>`it means it accepts zero ore more *package*
+arguments. When a command doesn’t have an argument, it means it doesn’t take
 any. The `|` indicates an alternative, shorter name.
 
 ### <a name="basecommands">Base commands</a>
@@ -282,7 +289,8 @@ To look for files in upstream containing the string `firefox`:
 
     baf find firefox
 
-To grep the case insensitive string `firefox` in the upstream, displaying the name of the matching file:
+To grep the case insensitive string `firefox` in the upstream, displaying the
+name of the matching file:
 
     baf grep -iH firefox
 
@@ -308,11 +316,13 @@ To rebuild NixOS from `/etc/nixos/configuration.nix` then perform switch:
 
     baf r-s
 
-To rebuild NixOS from `/etc/nixos/configuration.nix`, perform switch, and upgrade:
+To rebuild NixOS from `/etc/nixos/configuration.nix`, perform switch, and
+upgrade:
 
     baf r-s-u
 
-To update the user channel, root channel, upstream nixpkgs checkout, and index database:
+To update the user channel, root channel, upstream nixpkgs checkout, and index
+database on NixOS with full sudo access:
 
     baf f-u
 
@@ -320,11 +330,17 @@ To perform the above, then upgrade the whole NixOS system:
 
     baf f-U
 
+To update the user channel, upstream nixpkgs checkout, and index database on
+non-NixOS systems:
+
+    baf f-u-u
+
 
 <a name="notes">Notes</a>
 -------------------------
 
-In order for the `which` command to work on NixOS, put this in `/etc/nixos/configuration.nix`:
+In order for the `which` command to work on NixOS, put this in
+`/etc/nixos/configuration.nix`:
 
     programs.command-not-found.enable = true;
 
@@ -332,5 +348,6 @@ To update baf to the latest version:
 
     cd ~/common-lisp/baf; git pull --rebase origin master; make install
 
-baf uses [fd](https://github.com/sharkdp/fd) and [ripgrep](https://github.com/BurntSushi/ripgrep)
-for finding files and text strings.
+baf uses [fd](https://github.com/sharkdp/fd) and
+[ripgrep](https://github.com/BurntSushi/ripgrep) for finding files and text
+strings.
