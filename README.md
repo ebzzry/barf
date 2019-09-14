@@ -245,11 +245,7 @@ To display the version of Nix, Nixpkgs, and NixOS:
 
     baf version
 
-To view the list of installed packages, using the index:
-
-    baf v-i
-
-To view the list of installed packages, using querying:
+To view the list of installed packages:
 
     baf q-i
 
