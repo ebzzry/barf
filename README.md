@@ -8,9 +8,7 @@ commands listed [here](#commands).
 
 This program was salvaged from
 [ebzzry/scripts](https://github.com/ebzzry/scripts), turning it into a
-repository of its own, to make it easier to distribute. In this document, the
-`$` symbol represents the user prompt, while the `*` symbol represents the lisp
-prompt.
+repository of its own, to make it easier to distribute.
 
 
 Table of contents
