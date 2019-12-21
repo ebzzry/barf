@@ -409,7 +409,16 @@ See https://github.com/ebzzry/baf for more information~%"
 
 (defun main (&rest args)
   "The top-level entry point."
-  (apply #'baf args)
+  (handler-case (apply #'baf args)
+    (#+sbcl sb-sys:interactive-interrupt
+     #+ccl ccl:interrupt-signal-condition
+     #+clisp system::simple-interrupt-condition
+     #+ecl ext:interactive-interrupt
+     #+allegro excl:interrupt-signal
+     #+lispworks mp:process-interrupt
+     () nil)
+    (error (c)
+      (format t "Woops, an unknown error occured:~&~a~&" c)))
   (success))
 
 (register-commands :baf/baf)
