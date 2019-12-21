@@ -26,16 +26,16 @@
   "The name of this program.")
 
 (defparameter +version+
-  "0.0.30"
+  "1.0.0"
   "The version of this program.")
 
 (defparameter +http-repository+
   "https://github.com/NixOS/nixpkgs.git"
-  "The remote repository for Nixpkgs sources in HTTPS.")
+  "The remote repository for Nixpkgs sources via HTTP.")
 
 (defparameter +git-repository+
   "git@github.com:NixOS/nixpkgs.git"
-  "The remote repository for Nixpkgs sources in Git.")
+  "The remote repository for Nixpkgs sources via Git.")
 
 
 ;;;-------------------------------------------------------------------------------------------------
@@ -127,15 +127,6 @@ See https://github.com/ebzzry/baf for more information~%"
   "Return true if we are on NixOS."
   (file-exists-p "/etc/nixos/configuration.nix"))
 
-(defun cdx (&rest args)
-  "Change the current shell directory. Nope, does not work."
-  (when (>= (length args) 1)
-    (let ((directory (first args))
-          (arguments (rest args)))
-      (chdir directory)
-      (when arguments (run/i arguments))
-      (success))))
-
 (defun delete-tree (path)
   "Delete a directory tree."
   (let ((path (ensure-directory-pathname path)))
@@ -156,8 +147,6 @@ See https://github.com/ebzzry/baf for more information~%"
                  ((ppcre "^(init)$")
                   (ensure-nixpkgs)
                   (ensure-index))
-                 ((ppcre "^(cd)$")
-                  (apply #'cdx `(,(nixpkgs) ,@a)))
                  ((ppcre "^(out-path|o-p)$")
                   (match (run/ss `(,self "query" "--out-path" ,(last a)))
                     ((ppcre ".*? (/.*)" path) (format t "~A~%" path))))
