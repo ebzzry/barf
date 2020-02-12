@@ -70,10 +70,6 @@ plus the channels for the user and root:
 
     baf full-update
 
-If you can’t execute root commands as sudo, use the following, instead:
-
-    baf full-user-update
-
 
 <a name="commands">Commands</a>
 -------------------------------
@@ -184,7 +180,6 @@ any. The `|` indicates an alternative, shorter name.
 - `build-index|b-i|index <package>`
 - `upstream-update|u-u`
 - `full-update|f-u|complete-update`
-- `full-user-update|f-u-u|complete-user-update`
 - `full-upgrade|f-U|complete-upgrade`
 - `full-search|f-s <package>`
 
@@ -323,11 +318,6 @@ database on NixOS with full sudo access:
 To perform the above, then upgrade the whole NixOS system:
 
     baf f-U
-
-To update the user channel, upstream nixpkgs checkout, and index database on
-non-NixOS systems:
-
-    baf f-u-u
 
 
 <a name="notes">Notes</a>
