@@ -9,7 +9,6 @@ MAKEFLAGS += --no-builtin-rules
 .ONESHELL:
 .SHELLFLAGS := -eu -o pipefail -c
 .DELETE_ON_ERROR:
-.RECIPEPREFIX +=
 
 
 #-------------------------------------------------------------------------------
@@ -27,16 +26,16 @@ CL=cl-launch
 all: $(NAME)
 
 $(NAME):
-  @$(CL) --output $(PWD)/$(NAME) --dump ! --lisp sbcl --quicklisp --system $(NAME) --dispatch-system $(NAME)/baf
+	@$(CL) --output $(PWD)/$(NAME) --dump ! --lisp sbcl --quicklisp --system $(NAME) --dispatch-system $(NAME)/baf
 
 install: $(NAME)
-  @ln -sf $(SCRIPT) $(BINDIR)/baf
+	@ln -sf $(SCRIPT) $(BINDIR)/baf
 
 uninstall:
-  @rm -f $(BINDIR)/baf
+	@rm -f $(BINDIR)/baf
 
 clean:
-  @rm -f $(NAME)
+	@rm -f $(NAME)
 
 build:
-  docker build -t baf .
+	docker build -t baf .
