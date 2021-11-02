@@ -7,7 +7,7 @@
 
 (defsystem :barf
   :name "barf"
-  :version "0.0.1"
+  :version "0.1.0"
   :description "Common Lisp frontend to Nix commands"
   :license "CC0"
   :author "Rommel Martinez <ebzzry@ebzzry.io>"
