@@ -122,9 +122,9 @@ any. The `|` indicates an alternative, shorter name.
 - `root-channel-name|r-ch-n`
 
 
-### <a name="channelcommands">Channel commands</a>
+### <a name="upstreamcommands">Upstream commands</a>
 
-- `env <options>`
+- `env|e <options>`
 - `build|b <options>`
 - `query|q <package>`
 - `upgrade|U <package?>`
@@ -138,30 +138,30 @@ any. The `|` indicates an alternative, shorter name.
 - `compare-versions-greater-than|c-v-g-t`
 - `describe-available|d-a`
 - `index-available|i-a`
-- `search-available|search|s-a|s <package>`
+- `search-available|s-a <package>`
 - `view-available|v-a`
 - `profile|p <profile>`
 
 
-### <a name="upstreamcommands">Upstream commands</a>
+### <a name="channelcommands">Channel commands</a>
 
-- `upstream-env|u-e <options>`
-- `upstream-build|u-b <options>`
-- `upstream-query|u-q <package>`
-- `upstream-upgrade|u-U <package?>`
-- `upstream-upgrade-always|u-U-a <package?>`
-- `upstream-install|u-i <package>`
-- `upstream-Install|u-I <package>`
-- `upstream-query-available|u-q-a`
-- `upstream-compare-versions|u-c-v`
-- `upstream-compare-versions-less-than|u-c-v-l-t`
-- `upstream-compare-versions-equal|u-c-v-e`
-- `upstream-compare-versions-greater-than|u-c-v-g-t`
-- `upstream-describe-available|u-d-a`
-- `upstream-index-available|u-i-a`
-- `upstream-search-available|u-s-a <package>`
-- `upstream-view-available|u-v-a`
-- `upstream-profile|u-p <profile>`
+- `channels-env <options>`
+- `channels-build|c-b <options>`
+- `channels-query|c-q <package>`
+- `channels-upgrade|c-U <package?>`
+- `channels-upgrade-always|c-U-a <package?>`
+- `channels-install|c-i <package>`
+- `channels-Install|c-I <package>`
+- `channels-query-available|c-q-a`
+- `channels-compare-versions|c-c-v`
+- `channels-compare-versions-less-than|c-c-v-l-t`
+- `channels-compare-versions-equal|c-c-v-e`
+- `channels-compare-versions-greater-than|c-c-v-g-t`
+- `channels-describe-available|c-d-a`
+- `channels-index-available|c-i-a`
+- `channels-search-available|c-search|s-a|s <package>`
+- `channels-view-available|c-v-a`
+- `channels-profile|c-p <profile>`
 
 
 ### <a name="querycommands">Querying packages</a>
@@ -209,13 +209,13 @@ any. The `|` indicates an alternative, shorter name.
 <a name="usage">Usage</a>
 -------------------------
 
-To install the latest Firefox from upstream:
+To install the latest Firefox:
 
-    barf u-i firefox
+    barf install firefox
 
 To install the latest Firefox from channels:
 
-    barf i firefox
+    barf channels-install firefox
 
 To uninstall it:
 
@@ -223,15 +223,15 @@ To uninstall it:
 
 To search for upstream packages with the name `firefox`:
 
-    barf u-s firefox
+    barf search firefox
 
 To search for channel packages with the name `firefox`:
 
-    barf s firefox
+    barf channels-s firefox
 
 To search for packages from both upstream and channels, with the name `firefox`:
 
-    barf f-s firefox
+    barf full-searc firefox
 
 To display the version of Nix, Nixpkgs, and NixOS:
 
@@ -239,19 +239,16 @@ To display the version of Nix, Nixpkgs, and NixOS:
 
 To view the list of installed packages:
 
-    barf q-i
+    barf query-installed
 
 To view the list of installed packages, including description:
 
-    barf d-i
+    barf describe-installed
 
 To view the Haskell packages from upstream:
 
-    barf u-v-p haskellPackages
+    barf view-packages haskellPackages
 
-To search if Firefox is installed:
-
-    barf s-i firefox
 
 To install Firefox from upstream on a different profile:
 
@@ -261,9 +258,9 @@ then, to use this version of Firefox:
 
     PATH=$PATH/.barf/profiles/firefox/bin firefox
 
-To find out which package has the binary `firefox`:
+On NixOS, to find out which package has the binary `firefox`:
 
-    barf h firefox
+    barf which firefox
 
 To get the store path of Firefox:
 

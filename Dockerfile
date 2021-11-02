@@ -1,6 +1,6 @@
 FROM nixos/nix
 
-LABEL maintainer="Rommel MARTINEZ <rom@mimix.io>"
+LABEL maintainer="Rommel MARTINEZ <ebzzry@icloud.com>"
 LABEL version="1.0.0"
 
 RUN nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
