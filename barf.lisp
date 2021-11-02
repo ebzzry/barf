@@ -1,6 +1,6 @@
-;;;; baf.lisp
+;;;; barf.lisp
 
-(uiop:define-package :baf/baf
+(uiop:define-package :barf/barf
     (:use #:cl
           #:fare-utils
           #:uiop
@@ -10,11 +10,11 @@
           #:optima.ppcre
           #:cl-ppcre
           #:cl-launch/dispatch
-          #:baf/utils)
-  (:export #:baf
+          #:barf/utils)
+  (:export #:barf
            #:main))
 
-(in-package :baf/baf)
+(in-package :barf/barf)
 
 
 ;;;-------------------------------------------------------------------------------------------------
@@ -22,7 +22,7 @@
 ;;;-------------------------------------------------------------------------------------------------
 
 (defparameter +self+
-  (or (argv0) "baf")
+  (or (argv0) "barf")
   "The name of this program.")
 
 (defparameter +version+
@@ -46,12 +46,12 @@
   "Display program usage."
   (format t "Usage: ~A [COMMAND]... [OPTION]...
 
-See https://github.com/ebzzry/baf for more information~%"
+See https://github.com/ebzzry/barf for more information~%"
           +self+))
 
 (defun base-dir ()
-  "Return the base directory where to store baf data"
-  (subpathname (user-homedir-pathname) ".baf/"))
+  "Return the base directory where to store barf data"
+  (subpathname (user-homedir-pathname) ".barf/"))
 
 (defun base-path (path)
   "Return a path relative to BASE-DIR."
@@ -137,7 +137,7 @@ See https://github.com/ebzzry/baf for more information~%"
   (delete-tree (profile-path profile)))
 
 (exporting-definitions
-  (defun baf (args)
+  (defun barf (args)
     "Top-level command for managing Nix facilities."
     (cond ((null args) (display-usage))
           (t (let ((self (argv0))
@@ -169,17 +169,17 @@ See https://github.com/ebzzry/baf for more information~%"
                  ((ppcre "^(impure-shell|i-s)$")
                   (run! `(nix-shell ,@a)))
                  ((ppcre "^(pure-shell|p-s|shell)$")
-                  (baf `("impure-shell" "--pure" ,@a)))
+                  (barf `("impure-shell" "--pure" ,@a)))
                  ((ppcre "^(rebuild)$")
                   (run! `(sudo nixos-rebuild ,@a)))
                  ((ppcre "^(rebuild-switch|r-s)$")
-                  (baf `("rebuild" "switch" ,@a)))
+                  (barf `("rebuild" "switch" ,@a)))
                  ((ppcre "^(rebuild-switch-upgrade|r-s-u)$")
-                  (baf `("rebuild-switch" "--upgrade" ,@a)))
+                  (barf `("rebuild-switch" "--upgrade" ,@a)))
                  ((ppcre "^(instantiate)$")
                   (run! `(nix-instantiate ,@a)))
                  ((ppcre "^(eval)$")
-                  (baf `("instantiate" "--eval" "--strict" "--show-trace" ,@a)))
+                  (barf `("instantiate" "--eval" "--strict" "--show-trace" ,@a)))
                  ((ppcre "^(grep|g|rg)$")
                   (with-current-directory ((nixpkgs))
                     (run! `(fd "--extension" "nix" "--exec" "rg" ,@a "{}"))))
@@ -188,36 +188,36 @@ See https://github.com/ebzzry/baf for more information~%"
                  ((ppcre "^(install-package|i-p)$")
                   (run! `(sudo "nix-install-package" ,@a)))
                  ((ppcre "^(install-package-uri|i-p-u)$")
-                  (baf `("install-package" "--non-interactive" "--url" ,@a)))
+                  (barf `("install-package" "--non-interactive" "--url" ,@a)))
 
                  ((ppcre "^(references|r)$")
-                  (baf `("store" "-q" "--references" ,@a)))
+                  (barf `("store" "-q" "--references" ,@a)))
                  ((ppcre "^(referrers|R)$")
-                  (baf `("store" "-q" "--referrers" ,@a)))
+                  (barf `("store" "-q" "--referrers" ,@a)))
 
                  ((ppcre "^(query-root|q-r)$")
                   (run! `(sudo "nix-env" "--query" ,@a)))
                  ((ppcre "^(closure|c)$")
-                  (baf `("store" "-qR" ,@a)))
+                  (barf `("store" "-qR" ,@a)))
                  ((ppcre "^(set-flag|s-f)$")
-                  (baf `("env" "--set-flag" ,@a)))
+                  (barf `("env" "--set-flag" ,@a)))
                  ((ppcre "^(option|o)$")
                   (run! `(nixos-option ,@a)))
                  ((ppcre "^(garbage-collect|g-c)$")
-                  (baf `("store" "--gc" ,@a)))
+                  (barf `("store" "--gc" ,@a)))
                  ((ppcre "^(garbage-collect-delete|g-c-d)$")
                   (run! `(sudo "nix-collect-garbage" "-d" ,@a)))
 
                  ((ppcre "^(channel|ch)$")
                   (run! `(nix-channel ,@a)))
                  ((ppcre "^(channel-list|ch-l)$")
-                  (baf `("channel" "--list" ,@a)))
+                  (barf `("channel" "--list" ,@a)))
                  ((ppcre "^(channel-add|ch-a)$")
-                  (baf `("channel" "--add" ,@a)))
+                  (barf `("channel" "--add" ,@a)))
                  ((ppcre "^(channel-remove|ch-r)$")
-                  (baf `("channel" "--remove" ,@a)))
+                  (barf `("channel" "--remove" ,@a)))
                  ((ppcre "^(channel-update|ch-u)$")
-                  (baf `("channel" "--update" ,@a)))
+                  (barf `("channel" "--update" ,@a)))
                  ((ppcre "^(channel-name|ch-n)$")
                   (match (run/ss `(,self "channel-list" ,@a))
                     ((ppcre "^(.*?) .*" name)
@@ -226,13 +226,13 @@ See https://github.com/ebzzry/baf for more information~%"
                  ((ppcre "^(root-channel|r-ch)$")
                   (and (nixosp) (run! `(sudo "nix-channel" ,@a))))
                  ((ppcre "^(root-channel-list|r-ch-l)$")
-                  (baf `("root-channel" "--list" ,@a)))
+                  (barf `("root-channel" "--list" ,@a)))
                  ((ppcre "^(root-channel-add|r-ch-a)$")
-                  (baf `("root-channel" "--add" ,@a)))
+                  (barf `("root-channel" "--add" ,@a)))
                  ((ppcre "^(root-channel-remove|r-ch-r)$")
-                  (baf `("root-channel" "--remove" ,@a)))
+                  (barf `("root-channel" "--remove" ,@a)))
                  ((ppcre "^(root-channel-update|r-ch-u)$")
-                  (baf `("root-channel" "--update" ,@a)))
+                  (barf `("root-channel" "--update" ,@a)))
                  ((ppcre "^(root-channel-name|r-ch-n)$")
                   (match (run/ss `(,self "root-channel-list" ,@a))
                     ((ppcre "^(.*?) .*" name)
@@ -244,98 +244,98 @@ See https://github.com/ebzzry/baf for more information~%"
                  ((ppcre "^(build|b)$")
                   (run! `(nix-build ,@a)))
                  ((ppcre "^(query|q)$")
-                  (baf `("env" "--query" ,@a)))
+                  (barf `("env" "--query" ,@a)))
                  ((ppcre "^(upgrade|U)$")
-                  (baf `("env" "--upgrade" ,@a)))
+                  (barf `("env" "--upgrade" ,@a)))
                  ((ppcre "^(upgrade-always|U-a)$")
-                  (baf `("upgrade" "--always" ,@a)))
+                  (barf `("upgrade" "--always" ,@a)))
                  ((ppcre "^(install|i)$")
-                  (baf `("env" "--install" "-A"
+                  (barf `("env" "--install" "-A"
                                ,@(loop :for name :in a
                                        :collect (format nil "~A.~A" (run/ss `(,self "channel-name")) name)))))
                  ((ppcre "^(Install|I)$")
-                  (baf `("env" "--install" "-A" ,@a)))
+                  (barf `("env" "--install" "-A" ,@a)))
                  ((ppcre "^(query-available|q-a)$")
-                  (baf `("query" "--available" "-P" ,@a)))
+                  (barf `("query" "--available" "-P" ,@a)))
                  ((ppcre "^(compare-versions|c-v)$")
-                  (baf `("query" "--compare-versions" ,@a)))
+                  (barf `("query" "--compare-versions" ,@a)))
                  ((ppcre "^(compare-versions-less-than|c-v-l-t)$")
-                  (run! `(pipe (baf ("compare-versions" ,@a)) (rg "-N" "<")))
+                  (run! `(pipe (barf ("compare-versions" ,@a)) (rg "-N" "<")))
                   (success))
                  ((ppcre "^(compare-versions-equal|c-v-e)$")
-                  (run! `(pipe (baf ("compare-versions" ,@a)) (rg "-N" "=")))
+                  (run! `(pipe (barf ("compare-versions" ,@a)) (rg "-N" "=")))
                   (success))
                  ((ppcre "^(compare-versions-greater-than|c-v-g-t)$")
-                  (run! `(pipe (baf ("compare-versions" ,@a)) (rg "-N" ">")))
+                  (run! `(pipe (barf ("compare-versions" ,@a)) (rg "-N" ">")))
                   (success))
                  ((ppcre "^(describe-available|d-a)$")
-                  (baf `("query-available" "--description" ,@a)))
+                  (barf `("query-available" "--description" ,@a)))
                  ((ppcre "^(index-available|i-a)$")
-                  (run! `(pipe (baf ("query-available")) (gzip "-c" (> ,(index-channels))))))
+                  (run! `(pipe (barf ("query-available")) (gzip "-c" (> ,(index-channels))))))
                  ((ppcre "^(search-available|search|s-a|s)$")
                   (loop :for name :in a :do (run! `(rg "-N" "--color=auto" "-z" "-i" ,name ,(index-channels)))))
                  ((ppcre "^(view-available|v-a)$")
                   (run! `(zless ,(index-channels))))
                  ((ppcre "^(profile|p)$")
-                  (baf `("env" "-p" ,(profile-path (first a)) ,@(rest a))))
+                  (barf `("env" "-p" ,(profile-path (first a)) ,@(rest a))))
 
                  ;; upstream
                  ((ppcre "^(upstream-env|u-env)$")
-                  (baf `("env" "-f" ,(default-nix) ,@a)))
+                  (barf `("env" "-f" ,(default-nix) ,@a)))
                  ((ppcre "^(upstream-build|u-b)$")
-                  (baf `("build" "-I" ,(format nil "nixpkgs=~A" (nixpkgs)) ,@a)))
+                  (barf `("build" "-I" ,(format nil "nixpkgs=~A" (nixpkgs)) ,@a)))
                  ((ppcre "^(upstream-query|u-q)$")
-                  (baf `("upstream-env" "--query" ,@a)))
+                  (barf `("upstream-env" "--query" ,@a)))
                  ((ppcre "^(upstream-upgrade|u-U)$")
-                  (baf `("upstream-env" "--upgrade" ,@a)))
+                  (barf `("upstream-env" "--upgrade" ,@a)))
                  ((ppcre "^(upstream-upgrade-always|u-U-a)$")
-                  (baf `("upstream-upgrade" "--always" ,@a)))
+                  (barf `("upstream-upgrade" "--always" ,@a)))
                  ((ppcre "^(upstream-install|u-i)$")
-                  (baf `("upstream-env" "--install" "-A" ,@a)))
+                  (barf `("upstream-env" "--install" "-A" ,@a)))
                  ((ppcre "^(upstream-Install|u-I)$")
-                  (baf `("upstream-env" "--install" "-A" ,@a)))
+                  (barf `("upstream-env" "--install" "-A" ,@a)))
                  ((ppcre "^(upstream-query-available|u-q-a)$")
-                  (baf `("upstream-query" "--available" "-P" ,@a)))
+                  (barf `("upstream-query" "--available" "-P" ,@a)))
                  ((ppcre "^(upstream-compare-versions|u-c-v)$")
-                  (baf `("upstream-query" "--compare-versions" ,@a)))
+                  (barf `("upstream-query" "--compare-versions" ,@a)))
                  ((ppcre "^(upstream-compare-versions-less-than|u-c-v-l-t)$")
-                  (run! `(pipe (baf ("upstream-compare-versions" ,@a)) (rg "-N" "<")))
+                  (run! `(pipe (barf ("upstream-compare-versions" ,@a)) (rg "-N" "<")))
                   (success))
                  ((ppcre "^(upstream-compare-versions-equal|u-c-v-e)$")
-                  (run! `(pipe (baf ("upstream-compare-versions" ,@a)) (rg "-N" "=")))
+                  (run! `(pipe (barf ("upstream-compare-versions" ,@a)) (rg "-N" "=")))
                   (success))
                  ((ppcre "^(upstream-compare-versions-greater-than|u-c-v-g-t)$")
-                  (run! `(pipe (baf ("upstream-compare-versions" ,@a)) (rg "-N" ">")))
+                  (run! `(pipe (barf ("upstream-compare-versions" ,@a)) (rg "-N" ">")))
                   (success))
                  ((ppcre "^(upstream-describe-available|u-d-a)$")
-                  (baf `("upstream-query-available" "--description" ,@a)))
+                  (barf `("upstream-query-available" "--description" ,@a)))
                  ((ppcre "^(upstream-index-available|u-i-a)$")
-                  (run! `(pipe (baf ("upstream-query-available")) (gzip "-c" (> ,(index-upstream))))))
+                  (run! `(pipe (barf ("upstream-query-available")) (gzip "-c" (> ,(index-upstream))))))
                  ((ppcre "^(upstream-search-available|u-search|u-s-a|u-s)$")
                   (loop :for name :in a :do (run! `(rg "-N" "--color=auto" "-z" "-i" ,name ,(index-upstream)))))
                  ((ppcre "^(upstream-view-available|u-v-a)$")
                   (run! `(zless ,(index-upstream))))
                  ((ppcre "^(upstream-profile|u-p)$")
-                  (baf `("upstream-env" "-p" ,(profile-path (first a)) ,@(rest a))))
+                  (barf `("upstream-env" "-p" ,(profile-path (first a)) ,@(rest a))))
 
                  ;; installed
                  ((ppcre "^(query-installed|q-i)$")
-                  (baf `("query" "--installed" ,@a)))
+                  (barf `("query" "--installed" ,@a)))
                  ((ppcre "^(query-installed-names|q-i-n)$")
-                  (run! `(pipe (baf ("query-installed") ,@a) (sed "-e" "s/-[0-9].*//"))))
+                  (run! `(pipe (barf ("query-installed") ,@a) (sed "-e" "s/-[0-9].*//"))))
                  ((ppcre "^(search-installed|s-i)$")
                   (run! `(rg "-N" "--color=auto" "-z" "-i" ,@a ,(index-installed))))
                  ((ppcre "^(index-installed|i-i)$")
-                  (run! `(pipe (baf ("query-installed")) (gzip "-c" (> ,(index-installed))))))
+                  (run! `(pipe (barf ("query-installed")) (gzip "-c" (> ,(index-installed))))))
                  ((ppcre "^(describe-installed|d-i)$")
-                  (baf `("query-installed" "--description" ,@a)))
+                  (barf `("query-installed" "--description" ,@a)))
 
                  ;; common
                  ((ppcre "^(uninstall|remove|erase|e)$")
-                  (baf `("env" "--uninstall" ,@a)))
+                  (barf `("env" "--uninstall" ,@a)))
                  ((ppcre "^(build-index|b-i|index)$")
                   (loop :for command :in '("index-available" "upstream-index-available" "index-installed")
-                        :do (baf `(,command))))
+                        :do (barf `(,command))))
                  ((ppcre "^(upstream-update|u-u)$")
                   (with-current-directory ((nixpkgs))
                     (when (string= (run/ss `(git "rev-parse" "--abbrev-ref" "HEAD")) "master")
@@ -346,42 +346,42 @@ See https://github.com/ebzzry/baf for more information~%"
                                        (append '("root-channel-update") base-commands)
                                        base-commands)))
                     (loop :for command :in commands
-                          :do (baf `(,command)))))
+                          :do (barf `(,command)))))
                  ((ppcre "^(full-upgrade|f-U|complete-upgrade)$")
                   (loop :for command :in '("full-update" "upgrade" "upstream-upgrade" "rebuild-switch-upgrade")
-                        :do (baf `(,command))))
+                        :do (barf `(,command))))
                  ((ppcre "^(full-search|f-s)$")
                   (loop :for command :in '("search-available" "upstream-search-available")
-                        :do (baf `(,command ,@a))))
+                        :do (barf `(,command ,@a))))
                  ((ppcre "^(remove-profile|r-p)$")
                   (loop :for profile :in a :do (remove-profile profile)))
 
                  ;; miscellany
                  ((ppcre "^(view-packages|v-p)$")
-                  (baf `("query-available" "-A" ,(format nil "~A.~A" (run/ss `(,self "channel-name")) (first a)))))
+                  (barf `("query-available" "-A" ,(format nil "~A.~A" (run/ss `(,self "channel-name")) (first a)))))
                  ((ppcre "^(upstream-view-packages|u-v-p)$")
-                  (baf `("upstream-query-available" "-A" ,(first a))))
+                  (barf `("upstream-query-available" "-A" ,(first a))))
 
                  ((ppcre "^(make)$")
-                  (baf `("pure-shell" "--run" "make" ,@a)))
+                  (barf `("pure-shell" "--run" "make" ,@a)))
                  ((ppcre "^(nix-version)$")
-                  (baf `("env" "--version")))
+                  (barf `("env" "--version")))
                  ((ppcre "^(nixpkgs-version)$")
-                  (baf `("instantiate" "--eval" "<nixpkgs>" "-A" "lib.version")))
+                  (barf `("instantiate" "--eval" "<nixpkgs>" "-A" "lib.version")))
                  ((ppcre "^(nixos-version)$")
                   (run! `(nixos-version)))
                  ((ppcre "^(version)$")
                   (loop :for command :in '("nix" "nixpkgs" "nixos")
-                        :do (baf `(,(format nil "~A-version" command)))))
+                        :do (barf `(,(format nil "~A-version" command)))))
                  ((ppcre "^(cleanup)$")
                   (run! `(sudo "nix-collect-garbage" "--delete-older-than" "14d" ,@a))
-                  (baf `("rebuild" "boot")))
+                  (barf `("rebuild" "boot")))
 
                  ;; prefetch
                  ((ppcre "^(fetch-url)$")
                   (run! `(nix-prefetch-url ,@a)))
                  ((ppcre "^(fetch-file)$")
-                  (baf `("fetch-url" ,(format nil "file://~A" (first a)))))
+                  (barf `("fetch-url" ,(format nil "file://~A" (first a)))))
                  ((ppcre "^(fetch-git)$")
                   (run! `(nix-prefetch-git ,@a)))
                  ((ppcre "^(fetch-zip)$")
@@ -399,7 +399,7 @@ See https://github.com/ebzzry/baf for more information~%"
 
 (defun main (&rest args)
   "The top-level entry point."
-  (handler-case (apply #'baf args)
+  (handler-case (apply #'barf args)
     (#+sbcl sb-sys:interactive-interrupt
      #+ccl ccl:interrupt-signal-condition
      #+clisp system::simple-interrupt-condition
@@ -411,4 +411,4 @@ See https://github.com/ebzzry/baf for more information~%"
       (format t "Woops, an unknown error occured:~&~a~&" c)))
   (success))
 
-(register-commands :baf/baf)
+(register-commands :barf/barf)

@@ -1,12 +1,12 @@
 #-asdf3.1 (error "ASDF 3.1 or bust!")
 
-(defpackage :baf-system
+(defpackage :barf-system
   (:use #:cl #:asdf))
 
-(in-package #:baf-system)
+(in-package #:barf-system)
 
-(defsystem :baf
-  :name "baf"
+(defsystem :barf
+  :name "barf"
   :version "0.0.1"
   :description "Common Lisp frontend to Nix commands"
   :license "CC0"
@@ -15,5 +15,5 @@
   :depends-on ((:version "cl-scripting" "0.1")
                (:version "inferior-shell" "2.0.3.3")
                (:version "fare-utils" "1.0.0.5")
-               "baf/utils"
-               "baf/baf"))
+               "barf/utils"
+               "barf/barf"))

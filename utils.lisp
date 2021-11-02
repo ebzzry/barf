@@ -1,6 +1,6 @@
 ;;; utils.lisp
 
-(uiop:define-package :baf/utils
+(uiop:define-package :barf/utils
     (:use #:cl
           #:uiop
           #:inferior-shell
@@ -12,7 +12,7 @@
            #:apply-args
            #:apply-args-1))
 
-(in-package :baf/utils)
+(in-package :barf/utils)
 
 (defun home (path)
   "Return the home directory of the current user"

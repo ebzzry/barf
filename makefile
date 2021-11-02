@@ -15,7 +15,7 @@ MAKEFLAGS += --no-builtin-rules
 # Body
 #-------------------------------------------------------------------------------
 
-NAME=baf
+NAME=barf
 BINDIR=$(HOME)/bin
 BINARY=$(BINDIR)/$(NAME)
 SCRIPT=$(PWD)/$(NAME)
@@ -26,16 +26,16 @@ CL=cl-launch
 all: $(NAME)
 
 $(NAME):
-	@$(CL) --output $(PWD)/$(NAME) --dump ! --lisp sbcl --quicklisp --system $(NAME) --dispatch-system $(NAME)/baf
+	@$(CL) --output $(PWD)/$(NAME) --dump ! --lisp sbcl --quicklisp --system $(NAME) --dispatch-system $(NAME)/barf
 
 install: $(NAME)
-	@ln -sf $(SCRIPT) $(BINDIR)/baf
+	@ln -sf $(SCRIPT) $(BINDIR)/barf
 
 uninstall:
-	@rm -f $(BINDIR)/baf
+	@rm -f $(BINDIR)/barf
 
 clean:
 	@rm -f $(NAME)
 
 build:
-	docker build -t baf .
+	docker build -t barf .

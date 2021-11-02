@@ -1,7 +1,6 @@
-baf 🐶
-=====
+# barf 🤮
 
-This utility provides a single `baf` binary for managing your Nixpkgs and NixOS
+This utility provides a single `barf` binary for managing your Nixpkgs and NixOS
 installation. It makes it easier, at least for me, instead of memorizing many
 commands with different interfaces. This is not exhaustive and only covers the
 commands listed [here](#commands).
@@ -36,22 +35,22 @@ Install the dependencies:
 
     nix-env -i git sbcl gnumake curl cl-launch bzip2 nix-prefetch-scripts fd ripgrep
 
-Then, install baf:
+Then, install barf:
 
 ```bash
 mkdir -p ~/bin ~/common-lisp
 git clone https://gitlab.common-lisp.net/asdf/asdf ~/common-lisp/asdf
-git clone https://github.com/ebzzry/baf ~/common-lisp/baf
+git clone https://github.com/ebzzry/barf ~/common-lisp/barf
 curl -O https://beta.quicklisp.org/quicklisp.lisp
 sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file) (ql:quickload :cl-launch) (sb-ext:quit))'
-make -C ~/common-lisp/baf install
+make -C ~/common-lisp/barf install
 ```
 
 
 Or, in one line:
 
 ```bash
-mkdir -p ~/bin ~/common-lisp; git clone https://gitlab.common-lisp.net/asdf/asdf ~/common-lisp/asdf; git clone https://github.com/ebzzry/baf ~/common-lisp/baf; curl -O https://beta.quicklisp.org/quicklisp.lisp; sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file)  (ql:quickload :cl-launch) (sb-ext:quit))'; make -C ~/common-lisp/baf install
+mkdir -p ~/bin ~/common-lisp; git clone https://gitlab.common-lisp.net/asdf/asdf ~/common-lisp/asdf; git clone https://github.com/ebzzry/barf ~/common-lisp/barf; curl -O https://beta.quicklisp.org/quicklisp.lisp; sbcl --load quicklisp.lisp --eval  '(quicklisp-quickstart:install)' --eval '(let ((ql-util::*do-not-prompt* t)) (ql:add-to-init-file)  (ql:quickload :cl-launch) (sb-ext:quit))'; make -C ~/common-lisp/barf install
 ```
 
 
@@ -61,14 +60,14 @@ mkdir -p ~/bin ~/common-lisp; git clone https://gitlab.common-lisp.net/asdf/asdf
 On your first run, initialize the databases for the upstream nixpkgs checkout
 and index database:
 
-    baf init
+    barf init
 
 Bear in mind that re-running `init` will purge the index and package databases.
 
 Periodically, run the following command to update the aforementioned databases,
 plus the channels for the user and root:
 
-    baf full-update
+    barf full-update
 
 
 <a name="commands">Commands</a>
@@ -212,112 +211,112 @@ any. The `|` indicates an alternative, shorter name.
 
 To install the latest Firefox from upstream:
 
-    baf u-i firefox
+    barf u-i firefox
 
 To install the latest Firefox from channels:
 
-    baf i firefox
+    barf i firefox
 
 To uninstall it:
 
-    baf e firefox
+    barf e firefox
 
 To search for upstream packages with the name `firefox`:
 
-    baf u-s firefox
+    barf u-s firefox
 
 To search for channel packages with the name `firefox`:
 
-    baf s firefox
+    barf s firefox
 
 To search for packages from both upstream and channels, with the name `firefox`:
 
-    baf f-s firefox
+    barf f-s firefox
 
 To display the version of Nix, Nixpkgs, and NixOS:
 
-    baf version
+    barf version
 
 To view the list of installed packages:
 
-    baf q-i
+    barf q-i
 
 To view the list of installed packages, including description:
 
-    baf d-i
+    barf d-i
 
 To view the Haskell packages from upstream:
 
-    baf u-v-p haskellPackages
+    barf u-v-p haskellPackages
 
 To search if Firefox is installed:
 
-    baf s-i firefox
+    barf s-i firefox
 
 To install Firefox from upstream on a different profile:
 
-    baf u-p firefox -iA firefox
+    barf u-p firefox -iA firefox
 
 then, to use this version of Firefox:
 
-    PATH=$PATH/.baf/profiles/firefox/bin firefox
+    PATH=$PATH/.barf/profiles/firefox/bin firefox
 
 To find out which package has the binary `firefox`:
 
-    baf h firefox
+    barf h firefox
 
 To get the store path of Firefox:
 
-    baf o-p firefox
+    barf o-p firefox
 
 To display the `share/` subdirectory of Firefox, with some options to ls:
 
-    baf ls --color -FAtrl firefox/share
+    barf ls --color -FAtrl firefox/share
 
 To look for files in upstream containing the string `firefox`:
 
-    baf find firefox
+    barf find firefox
 
 To grep the case insensitive string `firefox` in the upstream, displaying the
 name of the matching file:
 
-    baf grep -iH firefox
+    barf grep -iH firefox
 
 To garbage collect:
 
-    baf g-c
+    barf g-c
 
 To aggressively garbage collect:
 
-    baf g-c-d
+    barf g-c-d
 
 To subscribe to the `nixos-unstable` channel for the current user:
 
-    baf ch-a https://nixos.org/channels/nixos-unstable nixos
-    baf ch-u
+    barf ch-a https://nixos.org/channels/nixos-unstable nixos
+    barf ch-u
 
 To subscribe to the `nixos-unstable` channel for root:
 
-    baf r-ch-a https://nixos.org/channels/nixos-unstable nixos
-    baf r-ch-u
+    barf r-ch-a https://nixos.org/channels/nixos-unstable nixos
+    barf r-ch-u
 
 To rebuild NixOS from `/etc/nixos/configuration.nix` then perform switch:
 
-    baf r-s
+    barf r-s
 
 To rebuild NixOS from `/etc/nixos/configuration.nix`, perform switch, and
 upgrade:
 
-    baf r-s-u
+    barf r-s-u
 
 To update the user channel, root channel, upstream nixpkgs checkout, and index
 database on NixOS with full sudo access:
 
-    baf f-u
+    barf f-u
 
 To perform the above, then upgrade the whole NixOS system:
 
-    baf f-U
+    barf f-U
 
 
 <a name="notes">Notes</a>
@@ -328,10 +327,10 @@ In order for the `which` command to work on NixOS, put this in
 
     programs.command-not-found.enable = true;
 
-To update baf to the latest version:
+To update barf to the latest version:
 
-    cd ~/common-lisp/baf; git pull --rebase origin master; make install
+    cd ~/common-lisp/barf; git pull --rebase origin master; make install
 
-baf uses [fd](https://github.com/sharkdp/fd) and
+barf uses [fd](https://github.com/sharkdp/fd) and
 [ripgrep](https://github.com/BurntSushi/ripgrep) for finding files and text
 strings.
