@@ -177,7 +177,7 @@ any. The `|` indicates an alternative, shorter name.
 
 - `uninstall|remove|erase|e <package>`
 - `build-index|b-i|index <package>`
-- `upstream-update|u-u`
+- `update|u`
 - `full-update|f-u|complete-update`
 - `full-upgrade|f-U|complete-upgrade`
 - `full-search|f-s <package>`
